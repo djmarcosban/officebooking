@@ -1,0 +1,77 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Repositories\EmpresaRepository;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Redirector;
+use Illuminate\Http\Request;
+use Request as Req;
+use Session;
+use Image;
+use URL;
+
+class Controller
+{
+
+    public function abortTo($to = '/') {
+        throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect($to));
+    }
+
+    public function setSession(string $session, string $param)
+    {
+        return request()->session()->put($session, $param);
+    }
+
+    public static function getSession(string $session)
+    {
+        return request()->session()->get($session);
+    }
+
+    public function validateSession()
+    {
+        $session = $this->getSession(session: 'empresa_nome');
+
+        if(empty($session)){
+            $redirectTo = Req::url();
+
+            if(Auth::user()->funcao == 'master')
+            {
+                $this->abortTo('/empresas?status=select&redirectTo='.$redirectTo);
+            }else
+            {
+                $this->configureSession(Auth::user()->empresa_id);
+            }
+        }
+    }
+
+    public static function hasSession()
+    {
+        return request()->session()->has('empresa_nome');
+    }
+
+    public function configureSession($empresa_id = null)
+    {
+        $empresaRepository = new EmpresaRepository;
+        $empresaId = $empresa_id ?? request('empresa_id');
+
+        $empresa = $empresaRepository->findById($empresaId);
+
+        if(!$empresa){
+            return redirect('/empresas?status=error');
+        }
+
+        $this->setSession(session: 'empresa_id', param: $empresa->id);
+        $this->setSession(session: 'empresa_nome', param: $empresa->company_name);
+
+        if(!empty(request('redirectTo'))){
+            return redirect(request('redirectTo'));
+        }
+
+        return redirect('/empresas');
+    }
+}

@@ -1,0 +1,34 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons bx bxs-dashboard",
+      "slug": "dashboard"
+    },
+    {
+      "name": "Eventos",
+      "icon": "menu-icon tf-icons bx bx-calendar-event",
+      "slug": "eventos",
+      "url": "/eventos"
+    },
+    {
+      "name": "Doadores",
+      "icon": "menu-icon tf-icons bx bx bx-happy-heart-eyes",
+      "slug": "doadores",
+      "url": "/doadores"
+    },
+    {
+      "name": "Pacientes",
+      "icon": "menu-icon tf-icons bx bx bx-happy-alt",
+      "slug": "pacientes",
+      "url": "/pacientes"
+    },
+    {
+      "name": "Sair",
+      "icon": "menu-icon tf-icons bx bx-power-off",
+      "slug": "logout",
+      "url": "/logout"
+    }
+  ]
+}
