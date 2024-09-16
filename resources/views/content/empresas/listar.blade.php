@@ -3,12 +3,12 @@
 @section('content')
 
 @include('_partials.styles.custom-container')
-@include('_partials.titles.list', ["title" => "Empresas", "count" => count($empresas), "url" => "/empresa/adicionar"])
+@include('_partials.titles.list', ["title" => "Empresas", "count" => count($empresas), "url" => "/instituicao/adicionar"])
 @include('_partials.errors')
 
 @if(!empty(request('status')) && request('status') == 'select')
   <div class="alert alert-danger" role="alert">
-    <p class="m-0 fw-bold mb-1">Acesse uma empresa para continuar navegando.</p>
+    <p class="m-0 fw-bold mb-1">Acesse uma instituicao para continuar navegando.</p>
     <p class="m-0">Clique em "Acessar" na aba "Gerenciar".</p>
   </div>
 @endif
@@ -16,7 +16,7 @@
 @if(!count($empresas))
 <div class="alert alert-dark" role="alert">
   <ul class="list-unstyled m-0">
-    <li>Nenhuma empresa encontrada. <a href="/empresa/adicionar">Clique aqui para adicionar</a>.</li>
+    <li>Nenhuma instituicao encontrada. <a href="/instituicao/adicionar">Clique aqui para adicionar</a>.</li>
   </ul>
 </div>
 @else
@@ -35,12 +35,12 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($empresas as $empresa)
+            @foreach ($empresas as $instituicao)
               <tr>
                 <td>
                   <div class="d-flex align-items-center">
-                    {{$empresa->company_name}}
-                    @if($empresa->status == 'ativo')
+                    {{$instituicao->company_name}}
+                    @if($instituicao->status == 'ativo')
                       <div class="badge bg-success text-white">Ativo</div>
                     @else
                       <div class="badge bg-danger text-white">Inativo</div>
@@ -48,21 +48,21 @@
                   </div>
                 </td>
                 <td>
-                  {{$empresa->city}}/{{$empresa->state}}
+                  {{$instituicao->city}}/{{$instituicao->state}}
                 </td>
                 <td>
-                  <a class="btn btn-primary btn-sm" href="/configurar/empresa/{{$empresa->id}}{{ (request('redirectTo')) ? "?redirectTo=".request('redirectTo') : "" }}">Acessar &#10142;</a>
+                  <a class="btn btn-primary btn-sm" href="/configurar/instituicao/{{$instituicao->id}}{{ (request('redirectTo')) ? "?redirectTo=".request('redirectTo') : "" }}">Acessar &#10142;</a>
                 </td>
                 <td>
                   <div class="d-flex">
-                    <a href="/empresa/{{$empresa->id}}/editar">
+                    <a href="/instituicao/{{$instituicao->id}}/editar">
                       <img src="{{ asset('assets/img/edit.png') }}" alt="Editar" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Editar" style="width: 21px" data-bs-original-title="" title="">
                     </a>
                     
-                    <form action="/empresa/{{$empresa->id}}/deletar" method="POST">
+                    <form action="/instituicao/{{$instituicao->id}}/deletar" method="POST">
                       @csrf
                       @method('DELETE')
-                      <input type="hidden" name="lote_id" value="{{$empresa->id}}">
+                      <input type="hidden" name="lote_id" value="{{$instituicao->id}}">
                       <button type="submit" onclick="if(!confirm('Deseja realmente fazer isso?')){ return false }" class="border-0 p-0 ms-2 bg-transparent" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Excluir" data-bs-original-title="" title="">
                         <img src="{{ asset('assets/img/delete.png') }}" alt="Excluir" class="rounded-circle" style="width: 20px">
                       </button>

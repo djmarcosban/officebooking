@@ -50,7 +50,7 @@
               <tr>
                 <td>{{$usuario->nome}}</td>
                 <td>{{$usuario->email}}</td>
-                <td>{{$usuario->empresa ? $usuario->empresa->company_name : '-'}}</td>
+                <td>{{$usuario->instituicao ? $usuario->instituicao->company_name : '-'}}</td>
                 <td>
                   <span class="badge badge-primary">{{ucfirst($usuario->funcao)}}</span>
                 </td>

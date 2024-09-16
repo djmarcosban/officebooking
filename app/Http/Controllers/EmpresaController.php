@@ -52,10 +52,10 @@ class EmpresaController extends Controller
   public function update()
   {
     $empresaId = request('instituicao_id');
-    $empresa = $this->empresaRepository->findById($empresaId);
+    $instituicao = $this->empresaRepository->findById($empresaId);
 
     return view('content.empresas.editar')->with([
-      "empresa" => $empresa
+      "instituicao" => $instituicao
     ]);
   }
 

@@ -24,7 +24,7 @@
   @csrf
   @method('PUT')
 
-  <input type="hidden" name="instituicao_id" value="{{$empresa->id}}" required>
+  <input type="hidden" name="instituicao_id" value="{{$instituicao->id}}" required>
   <h5>Dados externos:</h5>
   <div class="card mb-4 col-12">
     <div class="card-body">
@@ -32,67 +32,67 @@
         <div class="col-xl-3 col-12 mb-4">
           <div class="form-group">
             <label for="cnpj" class="form-label">CNPJ<span class="text-danger">*</span></label>
-            <input type="text" name="cnpj" id="cnpj" value="{{$empresa->cnpj}}" class="form-control" required>
+            <input type="text" name="cnpj" id="cnpj" value="{{$instituicao->cnpj}}" class="form-control" required>
           </div>
         </div>
         <div class="col-xl-5 col-12 mb-4">
           <div class="form-group">
             <label for="company_name" class="form-label">Razão Social<span class="text-danger">*</span></label>
-            <input type="text" name="company_name" id="company_name" value="{{$empresa->company_name}}" class="form-control" required>
+            <input type="text" name="company_name" id="company_name" value="{{$instituicao->company_name}}" class="form-control" required>
           </div>
         </div>
         <div class="col-xl-2 col-6 mb-4">
           <div class="form-group">
             <label for="contact" class="form-label">Contato<span class="text-danger">*</span></label>
-            <input type="text" name="contact" id="contact" value="{{$empresa->contact}}" class="form-control" required>
+            <input type="text" name="contact" id="contact" value="{{$instituicao->contact}}" class="form-control" required>
           </div>
         </div>
         <div class="col-xl-2 col-6 mb-4">
           <div class="form-group">
             <label for="cep" class="form-label">CEP<span class="text-danger">*</span></label>
-            <input type="text" name="cep" id="cep" value="{{$empresa->cep}}" class="form-control">
+            <input type="text" name="cep" id="cep" value="{{$instituicao->cep}}" class="form-control">
           </div>
         </div>
         <div class="col-xl-4 col-12 mb-4">
           <div class="form-group">
             <label for="address" class="form-label">Endereço<span class="text-danger">*</span></label>
-            <input type="text" name="address" id="address" value="{{$empresa->address}}" class="form-control">
+            <input type="text" name="address" id="address" value="{{$instituicao->address}}" class="form-control">
           </div>
         </div>
         <div class="col-xl-1 col-3 mb-4">
           <div class="form-group">
             <label for="number" class="form-label">Número<span class="text-danger">*</span></label>
-            <input type="text" name="number" id="number" value="{{$empresa->number}}" class="form-control">
+            <input type="text" name="number" id="number" value="{{$instituicao->number}}" class="form-control">
           </div>
         </div>
         <div class="col-xl-4 col-9 mb-4">
           <div class="form-group">
             <label for="complement" class="form-label">Complemento<span class="text-danger">*</span></label>
-            <input type="text" name="complement" id="complement" value="{{$empresa->complement}}" class="form-control">
+            <input type="text" name="complement" id="complement" value="{{$instituicao->complement}}" class="form-control">
           </div>
         </div>
         <div class="col-xl-3 col-6 mb-4">
           <div class="form-group">
             <label for="neighborhood" class="form-label">Bairro<span class="text-danger">*</span></label>
-            <input type="text" name="neighborhood" id="neighborhood" value="{{$empresa->neighborhood}}" class="form-control">
+            <input type="text" name="neighborhood" id="neighborhood" value="{{$instituicao->neighborhood}}" class="form-control">
           </div>
         </div>
         <div class="col-xl-3 col-6 mb-4">
           <div class="form-group">
             <label for="city" class="form-label">Cidade<span class="text-danger">*</span></label>
-            <input type="text" name="city" id="city" value="{{$empresa->city}}" class="form-control">
+            <input type="text" name="city" id="city" value="{{$instituicao->city}}" class="form-control">
           </div>
         </div>
         <div class="col-xl-1 col-4 mb-4">
           <div class="form-group">
             <label for="state" class="form-label">Estado<span class="text-danger">*</span></label>
-            <input type="text" name="state" id="state" value="{{$empresa->state}}" class="form-control">
+            <input type="text" name="state" id="state" value="{{$instituicao->state}}" class="form-control">
           </div>
         </div>
         <div class="col-xl-2 col-8 mb-4">
           <div class="form-group">
             <label for="country" class="form-label">País<span class="text-danger">*</span></label>
-            <input type="text" name="country" id="country" value="Brasil" value="{{$empresa->Brasil}}" class="form-control">
+            <input type="text" name="country" id="country" value="Brasil" value="{{$instituicao->Brasil}}" class="form-control">
           </div>
         </div>
         <div class="col-xl-2 col-12 mb-4">
@@ -100,8 +100,8 @@
             <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
             <div class="d-flex align-items-center">
               <select name="status" id="status" class="form-select">
-                <option value="inativo" {{$empresa->status == 'inativo' ? 'selected' : ''}}>Inativo</option>
-                <option value="ativo" {{$empresa->status == 'ativo' ? 'selected' : ''}}>Ativo</option>
+                <option value="inativo" {{$instituicao->status == 'inativo' ? 'selected' : ''}}>Inativo</option>
+                <option value="ativo" {{$instituicao->status == 'ativo' ? 'selected' : ''}}>Ativo</option>
               </select>
             </div>
           </div>

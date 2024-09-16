@@ -55,7 +55,7 @@ class VeiculoRepository implements VeiculoRepositoryInterface
 
     $empresaRepository = new EmpresaRepository;
 
-    $query["empresa"] = $empresaRepository->findById($query->instituicao_id);
+    $query["instituicao"] = $empresaRepository->findById($query->instituicao_id);
     $query["data_criacao"] = Carbon::parse($query->created_at)->format('d/m/Y - H:i:s');
 
     return $query;

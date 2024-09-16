@@ -66,14 +66,14 @@ Route::middleware(['auth', 'roles:professor|admin'])->group(function(){
 });
 
 Route::middleware(['auth', 'roles:admin'])->group(function(){
-    Route::get('/configurar/empresa/{instituicao_id}', 'App\Http\Controllers\Controller@configureSession')->where('instituicao_id', '[0-9]+');
+    Route::get('/configurar/instituicao/{instituicao_id}', 'App\Http\Controllers\Controller@configureSession')->where('instituicao_id', '[0-9]+');
 
     Route::get('empresas', 'App\Http\Controllers\EmpresaController@findAll')->name('empresas');
-    Route::get('empresa/{instituicao_id}/editar', 'App\Http\Controllers\EmpresaController@update')->name('empresas');
-    Route::put('empresa/{instituicao_id}/editar', 'App\Http\Controllers\EmpresaController@handleUpdate')->name('empresas');
-    Route::get('empresa/adicionar', 'App\Http\Controllers\EmpresaController@create')->name('empresas');
-    Route::post('empresa/adicionar', 'App\Http\Controllers\EmpresaController@handleCreate')->name('empresas');
-    Route::delete('empresa/{instituicao_id}/deletar', 'App\Http\Controllers\EmpresaController@delete')->name('empresas');
+    Route::get('instituicao/{instituicao_id}/editar', 'App\Http\Controllers\EmpresaController@update')->name('empresas');
+    Route::put('instituicao/{instituicao_id}/editar', 'App\Http\Controllers\EmpresaController@handleUpdate')->name('empresas');
+    Route::get('instituicao/adicionar', 'App\Http\Controllers\EmpresaController@create')->name('empresas');
+    Route::post('instituicao/adicionar', 'App\Http\Controllers\EmpresaController@handleCreate')->name('empresas');
+    Route::delete('instituicao/{instituicao_id}/deletar', 'App\Http\Controllers\EmpresaController@delete')->name('empresas');
 
     Route::get('usuarios', 'App\Http\Controllers\UsuarioController@findAll')->name('usuarios');
     Route::get('usuario/{usuario_id}/edit', 'App\Http\Controllers\UsuarioController@update')->name('usuarios');

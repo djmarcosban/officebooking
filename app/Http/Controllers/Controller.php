@@ -29,7 +29,8 @@ class Controller
 
     public static function getSession(string $session)
     {
-        return request()->session()->get($session);
+        // return request()->session()->get($session);
+        return 1;
     }
 
     public function validateSession()
@@ -59,14 +60,14 @@ class Controller
         $empresaRepository = new EmpresaRepository;
         $empresaId = $instituicao_id ?? request('instituicao_id');
 
-        $empresa = $empresaRepository->findById($empresaId);
+        $instituicao = $empresaRepository->findById($empresaId);
 
-        if(!$empresa){
+        if(!$instituicao){
             return redirect('/empresas?status=error');
         }
 
-        $this->setSession(session: 'instituicao_id', param: $empresa->id);
-        $this->setSession(session: 'empresa_nome', param: $empresa->company_name);
+        $this->setSession(session: 'instituicao_id', param: $instituicao->id);
+        $this->setSession(session: 'empresa_nome', param: $instituicao->company_name);
 
         if(!empty(request('redirectTo'))){
             return redirect(request('redirectTo'));

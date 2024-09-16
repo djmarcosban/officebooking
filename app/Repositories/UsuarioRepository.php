@@ -37,7 +37,7 @@ class UsuarioRepository implements UsuarioRepositoryInterface
 
     foreach($query as $key => $q){
 
-      $query[$key]["empresa"] = $empresaRepository->findById($q->instituicao_id);
+      $query[$key]["instituicao"] = $empresaRepository->findById($q->instituicao_id);
       $query[$key]["data_criacao"] = Carbon::parse($q->created_at)->format('d/m/Y - H:i:s');
     }
 
@@ -57,7 +57,7 @@ class UsuarioRepository implements UsuarioRepositoryInterface
 
     $empresaRepository = new EmpresaRepository;
 
-    $query["empresa"] = $empresaRepository->findById($query->instituicao_id);
+    $query["instituicao"] = $empresaRepository->findById($query->instituicao_id);
     $query["data_criacao"] = Carbon::parse($query->created_at)->format('d/m/Y - H:i:s');
 
     return $query;

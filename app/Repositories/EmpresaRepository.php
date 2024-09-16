@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\EmpresaRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Instituicao;
 use App\Models\Empresa;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -12,21 +13,21 @@ class EmpresaRepository implements EmpresaRepositoryInterface
 {
   public function findAll()
   {
-    $empresas = Empresa::all();
+    $empresas = Instituicao::all();
 
     return $empresas;
   }
 
   public function findById($id)
   {
-    $empresa = Empresa::find($id);
+    $instituicao = Instituicao::find($id);
 
-    return $empresa;
+    return $instituicao;
   }
 
   public function create($request)
   {
-    $query = new Empresa;
+    $query = new Instituicao;
 
     $logo = $request->file('logo');
     $hasPhoto = 0;
@@ -51,7 +52,7 @@ class EmpresaRepository implements EmpresaRepositoryInterface
 
   public function update($request)
   {
-    $query = Empresa::find($request->instituicao_id);
+    $query = Instituicao::find($request->instituicao_id);
 
     $query->cnpj = $request->cnpj;
     $query->company_name = $request->company_name;
@@ -73,9 +74,9 @@ class EmpresaRepository implements EmpresaRepositoryInterface
 
   public function delete($id)
   {
-    $empresa = Empresa::find($id);
-    if($empresa){
-      $empresa->delete();
+    $instituicao = Instituicao::find($id);
+    if($instituicao){
+      $instituicao->delete();
     }
 
     return true;

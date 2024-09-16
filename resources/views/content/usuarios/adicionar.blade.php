@@ -86,8 +86,8 @@
               <div class="d-flex align-items-center">
                 <select name="instituicao_id" id="instituicao_id" class="form-select">
                   <option value="">Escolha uma opção</option>
-                  @foreach ($empresas as $empresa)
-                    <option {{@old('instituicao_id') == $empresa->id ? 'selected' : ''}} value="{{$empresa->id}}">{{$empresa->company_name}}</option>
+                  @foreach ($empresas as $instituicao)
+                    <option {{@old('instituicao_id') == $instituicao->id ? 'selected' : ''}} value="{{$instituicao->id}}">{{$instituicao->company_name}}</option>
                   @endforeach
                 </select>
               </div>
