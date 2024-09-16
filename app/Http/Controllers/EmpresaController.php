@@ -35,7 +35,7 @@ class EmpresaController extends Controller
     $empresaId = $this->empresaRepository->create($request);
 
     if(!empty($request->return_url)){
-      return redirect($request->return_url.'?status=success&empresa_id='.$empresaId);
+      return redirect($request->return_url.'?status=success&instituicao_id='.$empresaId);
     }
 
     return redirect('/empresas?status=success');
@@ -43,7 +43,7 @@ class EmpresaController extends Controller
 
   public function delete()
   {
-    $empresaId = request('empresa_id');
+    $empresaId = request('instituicao_id');
     $this->empresaRepository->delete($empresaId);
 
     return redirect('/empresas?status=success');
@@ -51,7 +51,7 @@ class EmpresaController extends Controller
 
   public function update()
   {
-    $empresaId = request('empresa_id');
+    $empresaId = request('instituicao_id');
     $empresa = $this->empresaRepository->findById($empresaId);
 
     return view('content.empresas.editar')->with([

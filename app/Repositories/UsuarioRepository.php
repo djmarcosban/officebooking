@@ -19,7 +19,7 @@ class UsuarioRepository implements UsuarioRepositoryInterface
 
     if(Auth::user()->funcao == 'admin')
     {
-      $query = $query->where('empresa_id', Auth::user()->empresa_id);
+      $query = $query->where('instituicao_id', Auth::user()->instituicao_id);
     }
 
     if($pagination == 'false')
@@ -37,7 +37,7 @@ class UsuarioRepository implements UsuarioRepositoryInterface
 
     foreach($query as $key => $q){
 
-      $query[$key]["empresa"] = $empresaRepository->findById($q->empresa_id);
+      $query[$key]["empresa"] = $empresaRepository->findById($q->instituicao_id);
       $query[$key]["data_criacao"] = Carbon::parse($q->created_at)->format('d/m/Y - H:i:s');
     }
 
@@ -46,10 +46,10 @@ class UsuarioRepository implements UsuarioRepositoryInterface
 
   public function findById($id, $columns = ["*"])
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
     $columns = array_merge($columns, ["funcao"]);
 
-    $query = User::where('id', $id)->where('empresa_id', $empresa_id)->first($columns);
+    $query = User::where('id', $id)->where('instituicao_id', $instituicao_id)->first($columns);
 
     if(!$query){
       return 0;
@@ -57,7 +57,7 @@ class UsuarioRepository implements UsuarioRepositoryInterface
 
     $empresaRepository = new EmpresaRepository;
 
-    $query["empresa"] = $empresaRepository->findById($query->empresa_id);
+    $query["empresa"] = $empresaRepository->findById($query->instituicao_id);
     $query["data_criacao"] = Carbon::parse($query->created_at)->format('d/m/Y - H:i:s');
 
     return $query;
@@ -65,11 +65,11 @@ class UsuarioRepository implements UsuarioRepositoryInterface
 
   public function create($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = new User;
     $query->nome = $request->nome;
-    $query->empresa_id = $request->empresa_id ?? $empresa_id;
+    $query->instituicao_id = $request->instituicao_id ?? $instituicao_id;
     $query->funcao = $request->funcao;
     $query->email = $request->email;
     $query->status = $request->status;
@@ -84,9 +84,9 @@ class UsuarioRepository implements UsuarioRepositoryInterface
 
   public function update($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = User::where('id', $request->id)->where('empresa_id', $empresa_id)->first();
+    $query = User::where('id', $request->id)->where('instituicao_id', $instituicao_id)->first();
     $query->nome = $request->nome;
     $query->email = $request->email;
     $query->status = $request->status;
@@ -106,9 +106,9 @@ class UsuarioRepository implements UsuarioRepositoryInterface
 
   public function updateMeusDados($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = User::where('id', $request->id)->where('empresa_id', $empresa_id)->first();
+    $query = User::where('id', $request->id)->where('instituicao_id', $instituicao_id)->first();
     $query->nome = $request->nome;
 
     if(!empty($request->password)){
@@ -122,9 +122,9 @@ class UsuarioRepository implements UsuarioRepositoryInterface
 
   public function delete($id)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = User::where('empresa_id', $empresa_id)->where("id", $id)->first();
+    $query = User::where('instituicao_id', $instituicao_id)->where("id", $id)->first();
 
     if($query){
       $query->delete();
@@ -135,9 +135,9 @@ class UsuarioRepository implements UsuarioRepositoryInterface
 
   public function updatePassword($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = User::where('id', $request->id)->where('empresa_id', $empresa_id)->first();
+    $query = User::where('id', $request->id)->where('instituicao_id', $instituicao_id)->first();
     $query->password = Hash::make($request->password);
     $query->primeiro_acesso = 0;
     $query->save();

@@ -33,10 +33,10 @@ class VoucherRepository implements VoucherRepositoryInterface
 
   public function findAll($pagination = 'false', $columns = ['*'], $orderBy = "id", $orderType = "DESC", $per_page = 10)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = new Voucher;
-    $query = $query->where('empresa_id', $empresa_id);
+    $query = $query->where('instituicao_id', $instituicao_id);
     $query = $query->orderBy($orderBy, $orderType);
 
     if($pagination == 'false')
@@ -66,10 +66,10 @@ class VoucherRepository implements VoucherRepositoryInterface
   }
   public function findAllByEtapaId($etapa_id, $pagination = 'false', $columns = ['*'], $order = "DESC", $per_page = 10)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = new Voucher;
-    $query = $query->where('empresa_id', $empresa_id)->where('etapa_id', $etapa_id);
+    $query = $query->where('instituicao_id', $instituicao_id)->where('etapa_id', $etapa_id);
 
     if(Auth::user()->funcao == 'operador')
     {
@@ -103,9 +103,9 @@ class VoucherRepository implements VoucherRepositoryInterface
 
   public function findById($id, $columns = ["*"])
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = Voucher::where('empresa_id', $empresa_id)->where("id", $id)->first($columns);
+    $query = Voucher::where('instituicao_id', $instituicao_id)->where("id", $id)->first($columns);
 
     if(!$query){
       return 0;
@@ -124,7 +124,7 @@ class VoucherRepository implements VoucherRepositoryInterface
 
   public function create($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $qtd_acompanhantes = 1;
     if($request->cliente)
@@ -150,7 +150,7 @@ class VoucherRepository implements VoucherRepositoryInterface
     $query->valor_restante = $request->valor_restante;
     $query->valor_desconto = $request->valor_desconto;
     $query->valor_total = $request->valor_total;
-    $query->empresa_id = $empresa_id;
+    $query->instituicao_id = $instituicao_id;
     $query->create_user_id = Auth::user()->id;
     $query->update_user_id = Auth::user()->id;
     $query->save();
@@ -160,7 +160,7 @@ class VoucherRepository implements VoucherRepositoryInterface
 
   public function update($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $qtd_acompanhantes = 1;
     if($request->cliente)
@@ -186,7 +186,7 @@ class VoucherRepository implements VoucherRepositoryInterface
     $query->valor_restante = $request->valor_restante;
     $query->valor_desconto = $request->valor_desconto;
     $query->valor_total = $request->valor_total;
-    $query->empresa_id = $empresa_id;
+    $query->instituicao_id = $instituicao_id;
     $query->update_user_id = Auth::user()->id;
     $query->save();
 
@@ -195,7 +195,7 @@ class VoucherRepository implements VoucherRepositoryInterface
 
   public function updateEtapa($etapa_id, $voucher_id)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = Voucher::find($voucher_id);
     $query->etapa_id = $etapa_id;
@@ -207,9 +207,9 @@ class VoucherRepository implements VoucherRepositoryInterface
 
   public function delete($id)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = Voucher::where('empresa_id', $empresa_id)->where("id", $id)->first();
+    $query = Voucher::where('instituicao_id', $instituicao_id)->where("id", $id)->first();
 
     if($query){
       $query->delete();

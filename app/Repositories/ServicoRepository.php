@@ -13,10 +13,10 @@ class ServicoRepository implements ServicoRepositoryInterface
 {
   public function findAll($pagination = 'false', $columns = ['*'], $order = "DESC", $per_page = 10, $only_active = false)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = new Servico;
-    $query = $query->where('empresa_id', $empresa_id)
+    $query = $query->where('instituicao_id', $instituicao_id)
                    ->OrderBy('created_at', $order);
 
     if($only_active)
@@ -44,9 +44,9 @@ class ServicoRepository implements ServicoRepositoryInterface
 
   public function findById($id, $columns = ["*"])
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = Servico::where('empresa_id', $empresa_id)->where("id", $id)->first($columns);
+    $query = Servico::where('instituicao_id', $instituicao_id)->where("id", $id)->first($columns);
 
     if(!$query){
       return 0;
@@ -59,7 +59,7 @@ class ServicoRepository implements ServicoRepositoryInterface
 
   public function create($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = new Servico;
     $query->nome = mb_convert_case($request->nome, MB_CASE_UPPER, 'UTF-8');
@@ -67,7 +67,7 @@ class ServicoRepository implements ServicoRepositoryInterface
     $query->status = $request->status;
     $query->tipo = $request->tipo;
     $query->valor = $request->valor;
-    $query->empresa_id = $empresa_id;
+    $query->instituicao_id = $instituicao_id;
     $query->create_user_id = Auth::user()->id;
     $query->update_user_id = Auth::user()->id;
     $query->save();
@@ -77,7 +77,7 @@ class ServicoRepository implements ServicoRepositoryInterface
 
   public function update($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = Servico::find($request->id);
     $query->nome = mb_convert_case($request->nome, MB_CASE_UPPER, 'UTF-8');
@@ -85,7 +85,7 @@ class ServicoRepository implements ServicoRepositoryInterface
     $query->status = $request->status;
     $query->tipo = $request->tipo;
     $query->valor = $request->valor;
-    $query->empresa_id = $empresa_id;
+    $query->instituicao_id = $instituicao_id;
     $query->update_user_id = Auth::user()->id;
     $query->save();
 
@@ -94,9 +94,9 @@ class ServicoRepository implements ServicoRepositoryInterface
 
   public function delete($id)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = Servico::where('empresa_id', $empresa_id)->where("id", $id)->first();
+    $query = Servico::where('instituicao_id', $instituicao_id)->where("id", $id)->first();
 
     if($query){
       $query->delete();

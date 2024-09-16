@@ -14,10 +14,10 @@ class OrigemRepository implements OrigemRepositoryInterface
 {
   public function findAll($pagination = 'false', $columns = ['*'], $order = "DESC", $per_page = 10, $only_active = false)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = new Origem;
-    $query = $query->where('empresa_id', $empresa_id)
+    $query = $query->where('instituicao_id', $instituicao_id)
                    ->OrderBy('created_at', $order);
 
     if($only_active)
@@ -45,9 +45,9 @@ class OrigemRepository implements OrigemRepositoryInterface
 
   public function findById($id, $columns = ["*"])
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = Origem::where('empresa_id', $empresa_id)->where("id", $id)->first($columns);
+    $query = Origem::where('instituicao_id', $instituicao_id)->where("id", $id)->first($columns);
 
     if(!$query){
       return 0;
@@ -60,7 +60,7 @@ class OrigemRepository implements OrigemRepositoryInterface
 
   public function create($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = new Origem;
     $query->nome = mb_convert_case($request->nome, MB_CASE_UPPER, 'UTF-8');
@@ -72,7 +72,7 @@ class OrigemRepository implements OrigemRepositoryInterface
     $query->city = $request->city;
     $query->state = $request->state;
     $query->neighborhood = $request->neighborhood;
-    $query->empresa_id = $empresa_id;
+    $query->instituicao_id = $instituicao_id;
     $query->create_user_id = Auth::user()->id;
     $query->update_user_id = Auth::user()->id;
     $query->save();
@@ -82,7 +82,7 @@ class OrigemRepository implements OrigemRepositoryInterface
 
   public function update($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = Origem::find($request->id);
     $query->nome = mb_convert_case($request->nome, MB_CASE_UPPER, 'UTF-8');
@@ -94,7 +94,7 @@ class OrigemRepository implements OrigemRepositoryInterface
     $query->city = $request->city;
     $query->state = $request->state;
     $query->neighborhood = $request->neighborhood;
-    $query->empresa_id = $empresa_id;
+    $query->instituicao_id = $instituicao_id;
     $query->update_user_id = Auth::user()->id;
     $query->save();
 
@@ -103,9 +103,9 @@ class OrigemRepository implements OrigemRepositoryInterface
 
   public function delete($id)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = Origem::where('empresa_id', $empresa_id)->where("id", $id)->first();
+    $query = Origem::where('instituicao_id', $instituicao_id)->where("id", $id)->first();
 
     if($query){
       $query->delete();

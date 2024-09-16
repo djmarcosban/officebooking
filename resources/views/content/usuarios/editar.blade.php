@@ -84,12 +84,12 @@
       <div class="row">
         <div class="col-xl-6 col-12 mb-4 mb-xl-0">
           <div class="form-group">
-            <label for="empresa_id" class="form-label">Empresa<span class="text-danger">*</span></label>
+            <label for="instituicao_id" class="form-label">Empresa<span class="text-danger">*</span></label>
             <div class="d-flex align-items-center">
-              <select name="empresa_id" id="empresa_id" class="form-select">
+              <select name="instituicao_id" id="instituicao_id" class="form-select">
                 <option value="">Escolha uma opção</option>
                 @foreach ($empresas as $empresa)
-                  <option {{$usuario->empresa_id == $empresa->id ? 'selected' : ''}} value="{{$empresa->id}}">{{$empresa->company_name}}</option>
+                  <option {{$usuario->instituicao_id == $empresa->id ? 'selected' : ''}} value="{{$empresa->id}}">{{$empresa->company_name}}</option>
                 @endforeach
               </select>
             </div>

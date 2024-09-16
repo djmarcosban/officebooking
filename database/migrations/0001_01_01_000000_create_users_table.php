@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('email')->unique();
             $table->integer('instituicao_id');
-            $table->enum('is_admin', ['1', '0'])->default('0');
+            $table->string('funcao')->default('professor');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

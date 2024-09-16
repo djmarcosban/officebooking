@@ -51,7 +51,7 @@ class EmpresaRepository implements EmpresaRepositoryInterface
 
   public function update($request)
   {
-    $query = Empresa::find($request->empresa_id);
+    $query = Empresa::find($request->instituicao_id);
 
     $query->cnpj = $request->cnpj;
     $query->company_name = $request->company_name;

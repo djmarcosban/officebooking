@@ -44,7 +44,7 @@ class Controller
                 $this->abortTo('/empresas?status=select&redirectTo='.$redirectTo);
             }else
             {
-                $this->configureSession(Auth::user()->empresa_id);
+                $this->configureSession(Auth::user()->instituicao_id);
             }
         }
     }
@@ -54,10 +54,10 @@ class Controller
         return request()->session()->has('empresa_nome');
     }
 
-    public function configureSession($empresa_id = null)
+    public function configureSession($instituicao_id = null)
     {
         $empresaRepository = new EmpresaRepository;
-        $empresaId = $empresa_id ?? request('empresa_id');
+        $empresaId = $instituicao_id ?? request('instituicao_id');
 
         $empresa = $empresaRepository->findById($empresaId);
 
@@ -65,7 +65,7 @@ class Controller
             return redirect('/empresas?status=error');
         }
 
-        $this->setSession(session: 'empresa_id', param: $empresa->id);
+        $this->setSession(session: 'instituicao_id', param: $empresa->id);
         $this->setSession(session: 'empresa_nome', param: $empresa->company_name);
 
         if(!empty(request('redirectTo'))){

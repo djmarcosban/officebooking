@@ -24,7 +24,7 @@
   @csrf
   @method('PUT')
 
-  <input type="hidden" name="empresa_id" value="{{$empresa->id}}" required>
+  <input type="hidden" name="instituicao_id" value="{{$empresa->id}}" required>
   <h5>Dados externos:</h5>
   <div class="card mb-4 col-12">
     <div class="card-body">

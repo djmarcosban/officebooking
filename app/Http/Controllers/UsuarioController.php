@@ -46,7 +46,7 @@ class UsuarioController extends Controller
       "nome" => "required|string",
       "email" => 'required|email|unique:users,email,'.$request->id,
       "status" => "required|string",
-      "empresa_id" => "required"
+      "instituicao_id" => "required"
     ]);
 
     $this->usuarioRepository->update($request);

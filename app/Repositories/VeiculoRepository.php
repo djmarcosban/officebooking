@@ -14,10 +14,10 @@ class VeiculoRepository implements VeiculoRepositoryInterface
 {
   public function findAll($pagination = 'false', $columns = ['*'], $order = "DESC", $per_page = 10, $only_active = false)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = new Veiculo;
-    $query = $query->where('empresa_id', $empresa_id)
+    $query = $query->where('instituicao_id', $instituicao_id)
                    ->OrderBy('created_at', $order);
 
     if($only_active)
@@ -45,9 +45,9 @@ class VeiculoRepository implements VeiculoRepositoryInterface
 
   public function findById($id, $columns = ["*"])
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = Veiculo::where('empresa_id', $empresa_id)->where("id", $id)->first($columns);
+    $query = Veiculo::where('instituicao_id', $instituicao_id)->where("id", $id)->first($columns);
 
     if(!$query){
       return 0;
@@ -55,7 +55,7 @@ class VeiculoRepository implements VeiculoRepositoryInterface
 
     $empresaRepository = new EmpresaRepository;
 
-    $query["empresa"] = $empresaRepository->findById($query->empresa_id);
+    $query["empresa"] = $empresaRepository->findById($query->instituicao_id);
     $query["data_criacao"] = Carbon::parse($query->created_at)->format('d/m/Y - H:i:s');
 
     return $query;
@@ -63,7 +63,7 @@ class VeiculoRepository implements VeiculoRepositoryInterface
 
   public function create($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = new Veiculo;
     $query->marca = $request->marca;
@@ -71,7 +71,7 @@ class VeiculoRepository implements VeiculoRepositoryInterface
     $query->placa = $request->placa;
     $query->ano = $request->ano;
     $query->status = $request->status;
-    $query->empresa_id = $empresa_id;
+    $query->instituicao_id = $instituicao_id;
     $query->create_user_id = Auth::user()->id;
     $query->update_user_id = Auth::user()->id;
     $query->save();
@@ -81,7 +81,7 @@ class VeiculoRepository implements VeiculoRepositoryInterface
 
   public function update($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = Veiculo::find($request->id);
     $query->marca = $request->marca;
@@ -89,7 +89,7 @@ class VeiculoRepository implements VeiculoRepositoryInterface
     $query->placa = $request->placa;
     $query->ano = $request->ano;
     $query->status = $request->status;
-    $query->empresa_id = $empresa_id;
+    $query->instituicao_id = $instituicao_id;
     $query->update_user_id = Auth::user()->id;
     $query->save();
 
@@ -98,9 +98,9 @@ class VeiculoRepository implements VeiculoRepositoryInterface
 
   public function delete($id)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = Veiculo::where('empresa_id', $empresa_id)->where("id", $id)->first();
+    $query = Veiculo::where('instituicao_id', $instituicao_id)->where("id", $id)->first();
 
     if($query){
       $query->delete();

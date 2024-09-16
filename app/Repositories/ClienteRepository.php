@@ -14,10 +14,10 @@ class ClienteRepository implements ClienteRepositoryInterface
 {
   public function findAll($pagination = 'false', $columns = ['*'], $order = "DESC", $per_page = 10, $only_active = false)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = new Cliente;
-    $query = $query->where('empresa_id', $empresa_id)
+    $query = $query->where('instituicao_id', $instituicao_id)
                    ->OrderBy('created_at', $order);
 
     if($only_active)
@@ -46,9 +46,9 @@ class ClienteRepository implements ClienteRepositoryInterface
 
   public function findById($id, $columns = ["*"])
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = Cliente::where('empresa_id', $empresa_id)->where("id", $id)->first($columns);
+    $query = Cliente::where('instituicao_id', $instituicao_id)->where("id", $id)->first($columns);
 
     if(!$query){
       return 0;
@@ -62,7 +62,7 @@ class ClienteRepository implements ClienteRepositoryInterface
 
   public function create($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = new Cliente;
     $query->nome = mb_convert_case($request->nome, MB_CASE_UPPER, 'UTF-8');
@@ -71,7 +71,7 @@ class ClienteRepository implements ClienteRepositoryInterface
     $query->acompanhantes = mb_convert_case($request->acompanhantes, MB_CASE_UPPER, 'UTF-8');
     $query->numero_voo = $request->numero_voo;
     $query->status = $request->status;
-    $query->empresa_id = $empresa_id;
+    $query->instituicao_id = $instituicao_id;
     $query->create_user_id = Auth::user()->id;
     $query->update_user_id = Auth::user()->id;
     $query->save();
@@ -81,7 +81,7 @@ class ClienteRepository implements ClienteRepositoryInterface
 
   public function update($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = Cliente::find($request->id);
     $query->nome = mb_convert_case($request->nome, MB_CASE_UPPER, 'UTF-8');
@@ -90,7 +90,7 @@ class ClienteRepository implements ClienteRepositoryInterface
     $query->acompanhantes = mb_convert_case($request->acompanhantes, MB_CASE_UPPER, 'UTF-8');
     $query->numero_voo = $request->numero_voo;
     $query->status = $request->status;
-    $query->empresa_id = $empresa_id;
+    $query->instituicao_id = $instituicao_id;
     $query->update_user_id = Auth::user()->id;
     $query->save();
 
@@ -99,9 +99,9 @@ class ClienteRepository implements ClienteRepositoryInterface
 
   public function delete($id)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = Cliente::where('empresa_id', $empresa_id)->where("id", $id)->first();
+    $query = Cliente::where('instituicao_id', $instituicao_id)->where("id", $id)->first();
 
     if($query){
       $query->delete();

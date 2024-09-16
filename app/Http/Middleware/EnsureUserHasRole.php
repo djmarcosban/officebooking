@@ -18,9 +18,9 @@ class EnsureUserHasRole
         $funcoes = $request->user()->funcao;
         $rolesExploded = explode('|', $funcoes);
 
-        if ($request->user()->status != 'ativo') {
-            return response()->view('content.errors.inactive', [], 401);
-        }
+        // if ($request->user()->status != 'ativo') {
+        //     return response()->view('content.errors.inactive', [], 401);
+        // }
 
         if ($request->user()->primeiro_acesso) {
             return to_route('primeiro-acesso');

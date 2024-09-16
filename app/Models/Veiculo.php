@@ -15,7 +15,7 @@ class Veiculo extends Model
         'placa',
         'ano',
         'status',
-        'empresa_id',
+        'instituicao_id',
         'create_user_id',
         'update_user_id',
     ];

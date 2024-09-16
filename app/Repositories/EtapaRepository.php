@@ -12,10 +12,10 @@ class EtapaRepository implements EtapaRepositoryInterface
 {
   public function findAll($pagination = 'false', $columns = ['*'], $order = "DESC", $per_page = 10, $only_active = false)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = new Etapa;
-    $query = $query->where('empresa_id', $empresa_id);
+    $query = $query->where('instituicao_id', $instituicao_id);
 
     if($only_active)
     {
@@ -38,31 +38,31 @@ class EtapaRepository implements EtapaRepositoryInterface
 
   public function findLastPosition()
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = Etapa::where('empresa_id', $empresa_id)->orderBy('posicao', 'DESC')->first(['posicao']);
+    $query = Etapa::where('instituicao_id', $instituicao_id)->orderBy('posicao', 'DESC')->first(['posicao']);
 
     return $query;
   }
 
   public function findById($id)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = Etapa::where('empresa_id', $empresa_id)->where("id", $id)->first();
+    $query = Etapa::where('instituicao_id', $instituicao_id)->where("id", $id)->first();
 
     return $query;
   }
 
   public function create($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = new Etapa;
     $query->titulo = $request->titulo;
     $query->posicao = $request->posicao;
     $query->status = $request->status;
-    $query->empresa_id = $empresa_id;
+    $query->instituicao_id = $instituicao_id;
     $query->create_user_id = Auth::user()->id;
     $query->update_user_id = Auth::user()->id;
     $query->save();
@@ -72,13 +72,13 @@ class EtapaRepository implements EtapaRepositoryInterface
 
   public function update($request)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = Etapa::find($request->etapa_id);
     $query->titulo = $request->titulo;
     $query->posicao = $request->posicao;
     $query->status = $request->status;
-    $query->empresa_id = $empresa_id;
+    $query->instituicao_id = $instituicao_id;
     $query->update_user_id = Auth::user()->id;
     $query->save();
 
@@ -87,9 +87,9 @@ class EtapaRepository implements EtapaRepositoryInterface
 
   public function delete($id)
   {
-    $empresa_id = Controller::getSession('empresa_id');
+    $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = Etapa::where('empresa_id', $empresa_id)->where("id", $id)->first();
+    $query = Etapa::where('instituicao_id', $instituicao_id)->where("id", $id)->first();
 
     if($query){
       $query->delete();
