@@ -135,9 +135,9 @@ class UsuarioRepository implements UsuarioRepositoryInterface
 
   public function updatePassword($request)
   {
-    $instituicao_id = Controller::getSession('instituicao_id');
+    // $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = User::where('id', $request->id)->where('instituicao_id', $instituicao_id)->first();
+    $query = User::where('id', $request->id)->first();
     $query->password = Hash::make($request->password);
     $query->primeiro_acesso = 0;
     $query->save();

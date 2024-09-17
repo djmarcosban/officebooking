@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('email')->unique();
-            $table->integer('instituicao_id');
+            $table->integer('instituicao_id')->nullable();
+            $table->integer('create_user_id');
+            $table->integer('update_user_id');
             $table->string('funcao')->default('professor');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -16,9 +16,11 @@ return new class extends Migration
             $table->string('nome');
             $table->string('cap_max')->nullable();
             $table->string('marca')->nullable();
-            $table->integer('instituicao_id');
             $table->string('descricao');
             $table->text('horarios');
+            $table->integer('instituicao_id');
+            $table->integer('create_user_id');
+            $table->integer('update_user_id');
             $table->timestamps();
         });
     }

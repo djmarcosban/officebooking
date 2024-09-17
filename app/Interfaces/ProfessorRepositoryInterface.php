@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface EmpresaRepositoryInterface 
+interface ProfessorRepositoryInterface
 {
   public function findAll();
 

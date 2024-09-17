@@ -37,9 +37,9 @@ $container = ($container ?? 'container-xxl');
       $hasSession = Controller::hasSession();
       @endphp
       @if($hasSession)
-      <a href="/empresas?redirectTo={{\Request::url()}}" style="z-index: 999999">
+      <a href="/instituicoes?redirectTo={{\Request::url()}}" style="z-index: 999999">
         <div class="container-fluid bg-secondary px-4 py-2 text-white">
-          <p class="m-0 text-center">Empresa: {{Controller::getSession('empresa_nome')}}</p>
+          <p class="m-0 text-center">Instituição: {{Controller::getSession('instituicao_nome')}}</p>
         </div>
       </a>
       @endif

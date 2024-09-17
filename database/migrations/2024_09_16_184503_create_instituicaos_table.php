@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('instituicaos', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->integer('create_user_id');
+            $table->integer('update_user_id');
             $table->text('endereco');
             $table->timestamps();
         });

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\EmpresaRepository;
+use App\Repositories\InstituicaoRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -29,20 +29,19 @@ class Controller
 
     public static function getSession(string $session)
     {
-        // return request()->session()->get($session);
-        return 1;
+        return request()->session()->get($session);
     }
 
     public function validateSession()
     {
-        $session = $this->getSession(session: 'empresa_nome');
+        $session = $this->getSession(session: 'instituicao_nome');
 
         if(empty($session)){
             $redirectTo = Req::url();
 
-            if(Auth::user()->funcao == 'master')
+            if(Auth::user()->funcao == 'admin')
             {
-                $this->abortTo('/empresas?status=select&redirectTo='.$redirectTo);
+                $this->abortTo('/instituicoes?status=select&redirectTo='.$redirectTo);
             }else
             {
                 $this->configureSession(Auth::user()->instituicao_id);
@@ -52,27 +51,27 @@ class Controller
 
     public static function hasSession()
     {
-        return request()->session()->has('empresa_nome');
+        return request()->session()->has('instituicao_nome');
     }
 
     public function configureSession($instituicao_id = null)
     {
-        $empresaRepository = new EmpresaRepository;
-        $empresaId = $instituicao_id ?? request('instituicao_id');
+        $instituicaoRepository = new InstituicaoRepository;
+        $instituicaoId = $instituicao_id ?? request('instituicao_id');
 
-        $instituicao = $empresaRepository->findById($empresaId);
+        $instituicao = $instituicaoRepository->findById($instituicaoId);
 
         if(!$instituicao){
-            return redirect('/empresas?status=error');
+            return redirect('/instituicoes?status=error');
         }
 
         $this->setSession(session: 'instituicao_id', param: $instituicao->id);
-        $this->setSession(session: 'empresa_nome', param: $instituicao->company_name);
+        $this->setSession(session: 'instituicao_nome', param: $instituicao->nome);
 
         if(!empty(request('redirectTo'))){
             return redirect(request('redirectTo'));
         }
 
-        return redirect('/empresas');
+        return redirect('/instituicoes');
     }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('data');
             $table->string('horario');
             $table->string('descricao');
+            $table->integer('create_user_id');
             $table->integer('update_user_id');
             $table->timestamps();
         });

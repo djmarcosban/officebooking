@@ -50,12 +50,12 @@ Route::middleware(['auth', 'roles:professor|admin'])->group(function(){
     Route::post('servico/adicionar', 'App\Http\Controllers\ServicoController@handleCreate')->name('servicos');
     Route::delete('servico/{servico_id}/delete', 'App\Http\Controllers\ServicoController@delete')->name('servicos');
 
-    Route::get('clientes', 'App\Http\Controllers\ClienteController@findAll')->name('clientes');
-    Route::get('cliente/{cliente_id}/edit', 'App\Http\Controllers\ClienteController@update')->name('clientes');
-    Route::put('cliente/{cliente_id}/edit', 'App\Http\Controllers\ClienteController@handleUpdate')->name('clientes');
-    Route::get('cliente/adicionar', 'App\Http\Controllers\ClienteController@create')->name('clientes');
-    Route::post('cliente/adicionar', 'App\Http\Controllers\ClienteController@handleCreate')->name('clientes');
-    Route::delete('cliente/{cliente_id}/delete', 'App\Http\Controllers\ClienteController@delete')->name('clientes');
+    Route::get('professores', 'App\Http\Controllers\ProfessorController@findAll')->name('professores');
+    Route::get('professor/{professor_id}/editar', 'App\Http\Controllers\ProfessorController@update')->name('professores');
+    Route::put('professor/{professor_id}/editar', 'App\Http\Controllers\ProfessorController@handleUpdate')->name('professores');
+    Route::get('professor/adicionar', 'App\Http\Controllers\ProfessorController@create')->name('professores');
+    Route::post('professor/adicionar', 'App\Http\Controllers\ProfessorController@handleCreate')->name('professores');
+    Route::delete('professor/{professor_id}/delete', 'App\Http\Controllers\ProfessorController@delete')->name('professores');
 
     Route::get('veiculos', 'App\Http\Controllers\VeiculoController@findAll')->name('veiculos');
     Route::get('veiculo/{veiculo_id}/edit', 'App\Http\Controllers\VeiculoController@update')->name('veiculos');
@@ -68,12 +68,12 @@ Route::middleware(['auth', 'roles:professor|admin'])->group(function(){
 Route::middleware(['auth', 'roles:admin'])->group(function(){
     Route::get('/configurar/instituicao/{instituicao_id}', 'App\Http\Controllers\Controller@configureSession')->where('instituicao_id', '[0-9]+');
 
-    Route::get('empresas', 'App\Http\Controllers\EmpresaController@findAll')->name('empresas');
-    Route::get('instituicao/{instituicao_id}/editar', 'App\Http\Controllers\EmpresaController@update')->name('empresas');
-    Route::put('instituicao/{instituicao_id}/editar', 'App\Http\Controllers\EmpresaController@handleUpdate')->name('empresas');
-    Route::get('instituicao/adicionar', 'App\Http\Controllers\EmpresaController@create')->name('empresas');
-    Route::post('instituicao/adicionar', 'App\Http\Controllers\EmpresaController@handleCreate')->name('empresas');
-    Route::delete('instituicao/{instituicao_id}/deletar', 'App\Http\Controllers\EmpresaController@delete')->name('empresas');
+    Route::get('instituicoes', 'App\Http\Controllers\InstituicaoController@findAll')->name('instituicoes');
+    Route::get('instituicao/{instituicao_id}/editar', 'App\Http\Controllers\InstituicaoController@update')->name('instituicoes');
+    Route::put('instituicao/{instituicao_id}/editar', 'App\Http\Controllers\InstituicaoController@handleUpdate')->name('instituicoes');
+    Route::get('instituicao/adicionar', 'App\Http\Controllers\InstituicaoController@create')->name('instituicoes');
+    Route::post('instituicao/adicionar', 'App\Http\Controllers\InstituicaoController@handleCreate')->name('instituicoes');
+    Route::delete('instituicao/{instituicao_id}/deletar', 'App\Http\Controllers\InstituicaoController@delete')->name('instituicoes');
 
     Route::get('usuarios', 'App\Http\Controllers\UsuarioController@findAll')->name('usuarios');
     Route::get('usuario/{usuario_id}/edit', 'App\Http\Controllers\UsuarioController@update')->name('usuarios');

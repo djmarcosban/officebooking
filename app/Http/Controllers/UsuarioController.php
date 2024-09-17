@@ -3,23 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\UsuarioRepositoryInterface;
-use App\Interfaces\EmpresaRepositoryInterface;
+use App\Interfaces\InstituicaoRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
 {
-  private EmpresaRepositoryInterface $empresaRepository;
+  private InstituicaoRepositoryInterface $instituicaoRepository;
   private UsuarioRepositoryInterface $usuarioRepository;
 
   public function __construct(
-    EmpresaRepositoryInterface $empresaRepository,
+    InstituicaoRepositoryInterface $instituicaoRepository,
     UsuarioRepositoryInterface $usuarioRepository
   )
   {
     $this->usuarioRepository = $usuarioRepository;
-    $this->empresaRepository = $empresaRepository;
+    $this->instituicaoRepository = $instituicaoRepository;
   }
 
   public function findAll()
@@ -35,9 +35,9 @@ class UsuarioController extends Controller
   {
     $usuarioId = request('usuario_id');
     $usuario = $this->usuarioRepository->findById($usuarioId);
-    $empresas = $this->empresaRepository->findAll();
+    $instituicoes = $this->instituicaoRepository->findAll();
 
-    return view('content.usuarios.editar', compact('usuario', 'empresas'));
+    return view('content.usuarios.editar', compact('usuario', 'instituicoes'));
   }
 
   public function handleUpdate(Request $request)
@@ -56,9 +56,9 @@ class UsuarioController extends Controller
 
   public function create()
   {
-    $empresas = $this->empresaRepository->findAll();
+    $instituicoes = $this->instituicaoRepository->findAll();
 
-    return view('content.usuarios.adicionar', compact('empresas'));
+    return view('content.usuarios.adicionar', compact('instituicoes'));
   }
 
   public function handleCreate(Request $request)
