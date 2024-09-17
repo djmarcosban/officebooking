@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Tempo de geração: 17/09/2024 às 00:23
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Host: localhost
+-- Tempo de geração: 18/09/2024 às 00:47
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -70,6 +70,8 @@ CREATE TABLE `failed_jobs` (
 CREATE TABLE `instituicaos` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nome` varchar(255) NOT NULL,
+  `create_user_id` int(11) NOT NULL,
+  `update_user_id` int(11) NOT NULL,
   `endereco` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -79,8 +81,8 @@ CREATE TABLE `instituicaos` (
 -- Despejando dados para a tabela `instituicaos`
 --
 
-INSERT INTO `instituicaos` (`id`, `nome`, `endereco`, `created_at`, `updated_at`) VALUES
-(1, 'UNIALFA PERIMETRAL', 'test', NULL, NULL);
+INSERT INTO `instituicaos` (`id`, `nome`, `create_user_id`, `update_user_id`, `endereco`, `created_at`, `updated_at`) VALUES
+(1, 'UNIALFA Bueno', 1, 1, 'endereco', '2024-09-17 21:59:13', '2024-09-17 22:24:03');
 
 -- --------------------------------------------------------
 
@@ -93,9 +95,11 @@ CREATE TABLE `inventarios` (
   `nome` varchar(255) NOT NULL,
   `cap_max` varchar(255) DEFAULT NULL,
   `marca` varchar(255) DEFAULT NULL,
-  `instituicao_id` int(11) NOT NULL,
   `descricao` varchar(255) NOT NULL,
   `horarios` text NOT NULL,
+  `instituicao_id` int(11) NOT NULL,
+  `create_user_id` int(11) NOT NULL,
+  `update_user_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -185,6 +189,7 @@ CREATE TABLE `reservas` (
   `data` varchar(255) NOT NULL,
   `horario` varchar(255) NOT NULL,
   `descricao` varchar(255) NOT NULL,
+  `create_user_id` int(11) NOT NULL,
   `update_user_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -210,12 +215,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('bOR9brAVSmLPJTyAJ6t8l5pOFzkMmTr4qbCjlyhz', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibGtsMXp4eXpadTdPVXA5R3B1eUtUNGpDREdzYUNyeGV2aWxXd1FpWiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9tZXVzLWRhZG9zIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1726525314),
-('jr3EsoCeUCMzoMfvtFywtHid5FfvcC5gg8gC1d4f', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWXI5RVBpUENlWmxDNTFxbm5RMWVWWm05RHdJYWZlR3gzbG80RHpOcSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1726524743),
-('u5Yl7ye3Q1OXNr8iuiJXppBKCuo8wxMORmBrw6K7', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicDA1QmtNU3hQdEo4aW9EZmZvc0NUdHFjeDBtZmlobDRSeElMSmxsUiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1726523995),
-('UetP4ZIOxCw59SCWrx9q3lg2RifYh8ETDDBiDRe9', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiSEgwa2xNMENqVzJ2T0FKMGdYbldTZFZadHZhMTRtZW9FcVJUOUJMeiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3BhaW5lbCI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI4OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvcGFpbmVsIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1726524743),
-('ySjCB21EzWp78log5FsbbXDQJqulWhRU86WeUNQv', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiY0NPRnV5QjZyb0x2ZWJPUGp3bko0YXd4UUdNcm1hMGJhNTRDR1N2TyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1726524504),
-('yu884ZVyRm7yNzSVgLWz97JK6SAHYy5mBCbS8MoH', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaXdnZXN6V1ZIa0QydEFqY3RMTjlCMFF4SHBYek5nMDRINmNITFFBVyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1726524743);
+('e3BwtKTdCi8nhue9CyF6mXtknU8hDtJqX74zK0WV', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiVjV1bTBzN2dkVUZ6NnJYQkdBZXM1V3hlOUZmaGNOYmxGQXhxSVVheCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9mZXNzb3IvMi9lZGl0YXIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTQ6Imluc3RpdHVpY2FvX2lkIjtzOjE6IjEiO3M6MTY6Imluc3RpdHVpY2FvX25vbWUiO3M6MTM6IlVOSUFMRkEgQnVlbm8iO30=', 1726613199),
+('mwXw5Ebrykyr7vp2FSDosl2gR5XkirSYo3BZtZ3u', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidkdFa3dFSEhqQ1FNMks0NkY2cjJUa0FXWlNMekJLVHdwMnliV3ZDQyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0OToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2luc3RpdHVpY29lcz9zdGF0dXM9c3VjY2VzcyI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ5OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvaW5zdGl0dWljb2VzP3N0YXR1cz1zdWNjZXNzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1726610607);
 
 -- --------------------------------------------------------
 
@@ -227,8 +228,11 @@ CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nome` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `instituicao_id` int(11) NOT NULL,
+  `instituicao_id` int(11) DEFAULT NULL,
   `funcao` varchar(255) NOT NULL DEFAULT 'professor',
+  `create_user_id` int(11) NOT NULL,
+  `update_user_id` int(11) NOT NULL,
+  `primeiro_acesso` int(11) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
@@ -240,8 +244,9 @@ CREATE TABLE `users` (
 -- Despejando dados para a tabela `users`
 --
 
-INSERT INTO `users` (`id`, `nome`, `email`, `instituicao_id`, `funcao`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ale', 'email@email.com', 1, 'professor', NULL, '$2y$12$rwZQwH8.dbt5iupIDqZBVeW.8BvNJ94yXFgCCjcSTWy3LwhL.Q42.', NULL, '2024-09-16 22:10:09', '2024-09-16 22:10:43');
+INSERT INTO `users` (`id`, `nome`, `email`, `instituicao_id`, `funcao`, `create_user_id`, `update_user_id`, `primeiro_acesso`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Ale', 'email@email.com', NULL, 'admin', 0, 0, 0, NULL, '$2y$12$sR5Cq9CuScok.3yPoWr33eFhvioSNQQmp9c1RT1yThmSzeBUoQ0MC', NULL, NULL, '2024-09-17 21:58:07'),
+(2, 'Marcos', 'djmarcosban@hotmail.com', 1, 'professor', 1, 1, 0, NULL, '$2y$12$wkaA6GAKwjDrN06f1AtjbeoVytESmD6mz/86DS3lboUPgoiBwCPOO', NULL, '2024-09-17 22:34:59', '2024-09-17 22:46:26');
 
 --
 -- Índices para tabelas despejadas
@@ -338,7 +343,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de tabela `instituicaos`
 --
 ALTER TABLE `instituicaos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `inventarios`
@@ -368,7 +373,7 @@ ALTER TABLE `reservas`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
