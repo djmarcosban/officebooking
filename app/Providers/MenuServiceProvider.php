@@ -62,54 +62,19 @@ class MenuServiceProvider extends ServiceProvider
           ];
 
           $menu->menu[] = (object) [
+            "name" => "Inventário",
+            "icon" => "menu-icon tf-icons bx bx-receipt",
+            "slug" => "inventarios",
+            "url" => "/inventarios"
+          ];
+
+          $menu->menu[] = (object) [
             "name" => "Professores",
             "icon" => "menu-icon tf-icons bx bx-group",
-            "slug" => "professores",
+            "slug" => "inventario",
             "url" => "/professores"
           ];
         }
-
-        $menu->menu[] = (object) [
-          "name" => "Kanban",
-          "icon" => "menu-icon tf-icons bx bxs-dashboard",
-          "slug" => "kanban",
-          "url" => "/kanban"
-        ];
-
-        $menu->menu[] = (object) [
-          "name" => "Vouchers",
-          "icon" => "menu-icon tf-icons bx bx-credit-card-front",
-          "slug" => "vouchers",
-          "url" => "/vouchers"
-        ];
-
-        $menu->menu[] = (object) [
-          "name" => "Serviços",
-          "icon" => "menu-icon tf-icons bx bx-receipt",
-          "slug" => "servicos",
-          "url" => "/servicos"
-        ];
-
-        $menu->menu[] = (object) [
-          "name" => "Veículos",
-          "icon" => "menu-icon tf-icons bx bx-car",
-          "slug" => "veiculos",
-          "url" => "/veiculos"
-        ];
-
-        $menu->menu[] = (object) [
-          "name" => "Locais",
-          "icon" => "menu-icon tf-icons bx bx-pin",
-          "slug" => "origens",
-          "url" => "/origens"
-        ];
-
-        $menu->menu[] = (object) [
-          "name" => "Clientes",
-          "icon" => "menu-icon tf-icons bx bx-group",
-          "slug" => "clientes",
-          "url" => "/clientes"
-        ];
 
         $menu->menu[] = (object) [
           "name" => "Meus Dados",
@@ -117,22 +82,6 @@ class MenuServiceProvider extends ServiceProvider
           "slug" => "meus-dados",
           "url" => "/meus-dados"
         ];
-
-        if($user->funcao == 'admin' || $user->funcao == 'master'){
-          $menu->menu[] = (object) [
-            "name" => "Etapas do Kanban",
-            "icon" => "menu-icon tf-icons bx bx-customize",
-            "slug" => "etapas",
-            "url" => "/etapas"
-          ];
-
-          $menu->menu[] = (object) [
-            "name" => "Usuários",
-            "icon" => "menu-icon tf-icons bx bx-group",
-            "slug" => "usuarios",
-            "url" => "/usuarios"
-          ];
-        }
 
         $menu->menu[] = $fim;
 

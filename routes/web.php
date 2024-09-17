@@ -75,6 +75,13 @@ Route::middleware(['auth', 'roles:admin'])->group(function(){
     Route::post('instituicao/adicionar', 'App\Http\Controllers\InstituicaoController@handleCreate')->name('instituicoes');
     Route::delete('instituicao/{instituicao_id}/deletar', 'App\Http\Controllers\InstituicaoController@delete')->name('instituicoes');
 
+    Route::get('inventarios', 'App\Http\Controllers\InventarioController@findAll')->name('inventarios');
+    Route::get('inventario/{inventario_id}/editar', 'App\Http\Controllers\InventarioController@update')->name('inventarios');
+    Route::put('inventario/{inventario_id}/editar', 'App\Http\Controllers\InventarioController@handleUpdate')->name('inventarios');
+    Route::get('inventario/adicionar', 'App\Http\Controllers\InventarioController@create')->name('inventarios');
+    Route::post('inventario/adicionar', 'App\Http\Controllers\InventarioController@handleCreate')->name('inventarios');
+    Route::delete('inventario/{inventario_id}/deletar', 'App\Http\Controllers\InventarioController@delete')->name('inventarios');
+
     Route::get('usuarios', 'App\Http\Controllers\UsuarioController@findAll')->name('usuarios');
     Route::get('usuario/{usuario_id}/edit', 'App\Http\Controllers\UsuarioController@update')->name('usuarios');
     Route::put('usuario/{usuario_id}/edit', 'App\Http\Controllers\UsuarioController@handleUpdate')->name('usuarios');
