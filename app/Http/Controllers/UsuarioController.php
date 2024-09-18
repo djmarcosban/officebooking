@@ -125,6 +125,7 @@ class UsuarioController extends Controller
 
   public function handleUpdateMeusDados(Request $request){
     $request->id = Auth::id();
+
     $update = $this->usuarioRepository->updateMeusDados($request);
 
     return redirect('/meus-dados?status=success');

@@ -13,6 +13,7 @@ class InventarioController extends Controller
     InventarioRepositoryInterface $inventarioRepository,
   )
   {
+    $this->validateSession();
     $this->inventarioRepository = $inventarioRepository;
   }
 
@@ -33,26 +34,18 @@ class InventarioController extends Controller
   public function handleCreate(Request $request)
   {
     $inventarioId = $this->inventarioRepository->create($request);
-
-    if(!empty($request->return_url)){
-      return redirect($request->return_url.'?status=success&inventario_id='.$inventarioId);
-    }
-
-    return redirect('/inventarios?status=success');
-  }
-
-  public function delete()
-  {
-    $inventarioId = request('inventario_id');
-    $this->inventarioRepository->delete($inventarioId);
-
-    return redirect('/inventarios?status=success');
+    return 'success';
   }
 
   public function update()
   {
     $inventarioId = request('inventario_id');
     $inventario = $this->inventarioRepository->findById($inventarioId);
+
+    if(!$inventario)
+    {
+      return redirect('/inventarios?status=empty');
+    }
 
     return view('content.inventarios.editar')->with([
       "inventario" => $inventario
@@ -62,6 +55,13 @@ class InventarioController extends Controller
   public function handleUpdate(Request $request)
   {
     $this->inventarioRepository->update($request);
+    return 'success';
+  }
+
+  public function delete()
+  {
+    $inventarioId = request('inventario_id');
+    $this->inventarioRepository->delete($inventarioId);
 
     return redirect('/inventarios?status=success');
   }

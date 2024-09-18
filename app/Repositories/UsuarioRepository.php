@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\UsuarioRepositoryInterface;
-use App\Repositories\EmpresaRepository;
+use App\Repositories\InstituicaoRepository;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Carbon\Carbon;
@@ -33,7 +33,7 @@ class UsuarioRepository implements UsuarioRepositoryInterface
       return 0;
     }
 
-    $empresaRepository = new EmpresaRepository;
+    $empresaRepository = new InstituicaoRepository;
 
     foreach($query as $key => $q){
 
@@ -47,15 +47,25 @@ class UsuarioRepository implements UsuarioRepositoryInterface
   public function findById($id, $columns = ["*"])
   {
     $instituicao_id = Controller::getSession('instituicao_id');
+
     $columns = array_merge($columns, ["funcao"]);
 
-    $query = User::where('id', $id)->where('instituicao_id', $instituicao_id)->first($columns);
+    $query = new User;
+    $query = $query->where('id', $id);
+
+    if(Auth::user()->funcao != 'admin' && Auth::id() != $id)
+    {
+      $query = $query->where('instituicao_id', $instituicao_id);
+    }
+    $query = $query->first($columns);
+
+    return $query;
 
     if(!$query){
       return 0;
     }
 
-    $empresaRepository = new EmpresaRepository;
+    $empresaRepository = new InstituicaoRepository;
 
     $query["instituicao"] = $empresaRepository->findById($query->instituicao_id);
     $query["data_criacao"] = Carbon::parse($query->created_at)->format('d/m/Y - H:i:s');
@@ -108,7 +118,7 @@ class UsuarioRepository implements UsuarioRepositoryInterface
   {
     $instituicao_id = Controller::getSession('instituicao_id');
 
-    $query = User::where('id', $request->id)->where('instituicao_id', $instituicao_id)->first();
+    $query = $this->findById($request->id);
     $query->nome = $request->nome;
 
     if(!empty($request->password)){

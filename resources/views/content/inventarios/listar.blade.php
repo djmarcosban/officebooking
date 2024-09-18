@@ -29,8 +29,8 @@
           <thead>
             <tr>
               <th class="text-dark">Nome</th>
-              <th class="text-dark">Endereço</th>
-              <th class="text-dark">Gerenciar</th>
+              <th class="text-dark">Cap. Máx.</th>
+              <th class="text-dark">Marca</th>
               <th class="text-dark">Ações</th>
             </tr>
           </thead>
@@ -44,11 +44,13 @@
                 </td>
                 <td>
                   <div class="d-flex align-items-center">
-                    {{$inventario->endereco}}
+                    {{$inventario->cap_max}}
                   </div>
                 </td>
                 <td>
-                  <a class="btn btn-primary btn-sm" href="/configurar/inventario/{{$inventario->id}}{{ (request('redirectTo')) ? "?redirectTo=".request('redirectTo') : "" }}">Acessar &#10142;</a>
+                  <div class="d-flex align-items-center">
+                    {{$inventario->marca}}
+                  </div>
                 </td>
                 <td>
                   <div class="d-flex">

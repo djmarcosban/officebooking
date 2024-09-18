@@ -1,154 +1,103 @@
 <script>
-  $("#cnpj").mask('99.999.999/9999-99')
+  var colSubmit = $('#col_btn_submit');
+  $('#submit').submit(function(e){
+    e.preventDefault()
+    enviarParaServidor()
+    $(colSubmit).html('<div class="spinner-border mt-1 text-light" role="status"></div>')
+  })
 
-  function switchError(value = null, isError = false){
-    let btn = $("input[type=submit]")
-    let error = $('.error')
-  
-    if(isError){
-      $(btn).attr('disabled', '')
-      $(error).removeClass('d-none').html(value)
-    }else{
-      $(error).addClass('d-none')
-      $(btn).removeAttr('disabled')
-    }
-  }
-  
-  $("#cnpj").blur((e) => {
-    let cnpj = e.target
-    let value = cnpj.value
-    value = value.replace(/\D/g,'')
+  var horariosAdicionados = {};
+  var diasAdicionados = [];
 
-    if(!value.length || value.length != 14){
-      cnpj.classList.add('is-invalid')
-      switchError('CNPJ inválido', true)
+  function adicionarDiaSemana() {
+    let lista = $('.lista')
+    const listaHorarios = document.getElementById('listaHorarios');
+
+    let diaSemana = $('#diaSemana').val();
+    let horarioInicio = $('#horarioInicio').val();
+    let horarioFim = $('#horarioFim').val();
+
+    if(horarioInicio == horarioFim){
+      alert('Os horários não podem ser iguais');
       return false
     }
-   
-    let razao_social = $('#company_name')
-    let contato = $('#contact')
-    let logradouro = $('#address')
-    let cep = $('#cep')
-    let numero = $('#number')
-    let cidade = $('#city')
-    let complemento = $('#complement')
-    let uf = $('#state')
-    let bairro = $('#neighborhood')
-  
-    $.ajax({
-      url: 'https://brasilapi.com.br/api/cnpj/v1/' + value,
-      type: "GET",
-      dataType: 'json',
-      data: {},
-      success: (res) => {
-        cnpj.classList.remove('is-invalid')
-        cnpj.classList.add('is-valid')
-  
-        $(razao_social)
-          .val(res.razao_social)
-          .addClass('is-valid')
-          .removeClass('is-invalid')
-  
-        $(contato)
-          .val(res.ddd_telefone_1)
-          .addClass('is-valid')
-          .removeClass('is-invalid')
-  
-        $(logradouro)
-          .val(res.logradouro)
-          .addClass('is-valid')
-          .removeClass('is-invalid')
-  
-        $(cep)
-          .val(res.cep)
-          .addClass('is-valid')
-          .removeClass('is-invalid')
-  
-        $(numero)
-          .val(res.numero)
-          .addClass('is-valid')
-          .removeClass('is-invalid')
-  
-        $(cidade)
-          .val(res.municipio)
-          .addClass('is-valid')
-          .removeClass('is-invalid')
-  
-        $(complemento)
-          .val(res.complemento)
-          .addClass('is-valid')
-          .removeClass('is-invalid')
-  
-        $(uf)
-          .val(res.uf)
-          .addClass('is-valid')
-          .removeClass('is-invalid')
-  
-        $(bairro)
-          .val(res.bairro)
-          .addClass('is-valid')
-          .removeClass('is-invalid')
-  
-        
-        switchError('', false)
-        
-      },
-      error: (res) => {
-        cnpj.classList.add('is-invalid')
-  
-        $(razao_social)
-          .val('')
-          .addClass('is-invalid')
-  
-        $(contato)
-          .val('')
-          .addClass('is-invalid')
-  
-        $(logradouro)
-          .val('')
-          .addClass('is-invalid')
-  
-        $(cep)
-          .val('')
-          .addClass('is-invalid')
-  
-        $(numero)
-          .val('')
-          .addClass('is-invalid')
-  
-        $(cidade)
-          .val('')
-          .addClass('is-invalid')
-  
-        $(complemento)
-          .val('')
-          .addClass('is-invalid')
-  
-        $(uf)
-          .val('')
-          .addClass('is-invalid')
-  
-        $(bairro)
-          .val('')
-          .addClass('is-invalid')
-  
-        switchError(res.responseJSON.message, true)
-        
-      }
-    })
-  })
-</script>
 
-<script>
-$('#logo').change(function() {
-  let logo = $('.current-logo')
-  let file = $(this)[0].files[0]
+    diasAdicionados.push(diaSemana)
 
-  if (file) {
-    let name = file.name
+    if (!horariosAdicionados[diaSemana]) {
+      horariosAdicionados[diaSemana] = [];
+    }
 
-    $(logo)
-      .attr("src", URL.createObjectURL(file))
+    horariosAdicionados[diaSemana].push({
+      dia: diaSemana,
+      inicio: horarioInicio,
+      fim: horarioFim
+    });
+
+    const novoItem = document.createElement('li');
+    $(novoItem).html(`<b>${getNomeDiaSemana(diaSemana)}</b>: das ${horarioInicio} às ${horarioFim}`);
+
+    listaHorarios.append(novoItem);
+    lista.removeClass('d-none')
   }
-});
+
+  function getNomeDiaSemana(dia) {
+      const diasSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+      return diasSemana[dia];
+  }
+
+  function enviarParaServidor() {
+    let nome = $('#nome').val()
+    let cap_max = $('#cap_max').val()
+    let marca = $('#marca').val()
+    let inventario_id = $('#inventario_id').val()
+    let acao = $('#acao').val()
+    let descricao = $('#descricao').val()
+
+    let uri = '/inventario/adicionar'
+    let type = 'POST'
+
+    if(acao == 'editar')
+    {
+      type = 'PUT'
+      uri = '/inventario/' + inventario_id + '/editar'
+    }
+
+    let diasAdicionadosUnificados = diasAdicionados.filter((value, index, self) => {
+      return self.indexOf(value) === index;
+    });
+
+    $.ajax({
+      type: type,
+      url: uri,
+      data: {
+        _token: $('input[name="_token"]').val(),
+        nome: nome,
+        inventario_id: inventario_id,
+        cap_max: cap_max,
+        marca: marca,
+        descricao: descricao,
+        horarios: horariosAdicionados,
+        dias: diasAdicionadosUnificados
+      },
+      success: function(response) {
+        if(response == 'hours_empty'){
+          alert('Erro na hora de atualizar a agenda. Adicione os horários corretamente.');
+          return false;
+        }
+
+        if(response == 'success')
+        {
+          location.href = '/inventarios?status=success'
+          return false
+        }else{
+          alert('Houve um erro ao tentar realizar essa ação. Comunique o administrador.');
+          return false;
+        }
+      },
+      error: function(error) {
+        alert(error.responseJSON.message)
+      }
+    });
+  }
 </script>

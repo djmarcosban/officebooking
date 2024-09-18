@@ -13,8 +13,10 @@ class ProfessorRepository implements ProfessorRepositoryInterface
 {
   public function findAll()
   {
-    $professores = User::where('funcao', 'professor')->get();
+    $instituicao_id = Controller::getSession('instituicao_id');
     $instituicaoRepository = new InstituicaoRepository;
+
+    $professores = User::where('funcao', 'professor')->where('instituicao_id', $instituicao_id)->get();
 
     foreach($professores as $key => $professor)
     {
@@ -26,7 +28,8 @@ class ProfessorRepository implements ProfessorRepositoryInterface
 
   public function findById($id)
   {
-    $professor = User::where('funcao', 'professor')->where('id', $id)->first();
+    $instituicao_id = Controller::getSession('instituicao_id');
+    $professor = User::where('funcao', 'professor')->where('instituicao_id', $instituicao_id)->where('id', $id)->first();
 
     return $professor;
   }
