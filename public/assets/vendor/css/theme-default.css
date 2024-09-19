@@ -1329,7 +1329,7 @@
  }
  .bg-menu-theme .menu-item.active>.menu-link,
  .bg-menu-theme .menu-item.open:not(.menu-item-closing)>.menu-toggle {
-  color: white
+  color: #002F3F
  }
  .bg-menu-theme .menu-item.active>.menu-link:not(.menu-toggle) {
   background-color:#234
@@ -1397,10 +1397,10 @@
   color:#1243B6
  }
  .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
-  background-color:#D9D9D9 !important
+  background-color: #E6E6E6 !important
  }
  .bg-menu-theme .menu-inner>.menu-item.active:before {
-  background:#D9D9D9
+  background:#E6E6E6 !important
  }
 
  .bg-menu-theme .menu-sub>.menu-item>.menu-link:before {
