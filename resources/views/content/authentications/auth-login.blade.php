@@ -19,8 +19,6 @@
             <div class="app-brand-logo mb-2 demo">@include('_partials.macros',["size"=>"h3","color"=>"dark","text_align"=>"center", "show_city"=>true])</div>
           </div>
           <!-- /Logo -->
-          <h5 class="mb-4 fw-normal text-dark text-center">Acesse sua conta</h5>
-
           @if (session('status'))
             @switch(session('status'))
               @case('passwords.reset')
