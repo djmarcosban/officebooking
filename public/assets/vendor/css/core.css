@@ -10069,7 +10069,7 @@ button.list-group-item-gray.active {
 }
 
 .rounded-1 {
-  border-radius: 0.25rem !important;
+  border-radius: 9px !important;
 }
 
 .rounded-2 {

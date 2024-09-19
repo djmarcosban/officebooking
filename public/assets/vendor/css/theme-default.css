@@ -344,10 +344,11 @@
 	background-color: #00B9FF;
 	border-color: #00B9FF;
 	color: #FFFF;
+    transition-duration: 200ms;
   }
   .btn-primary:hover {
-  background-color: #FF9700;
-  border-color: #FF9700;
+  background-color: #002F3F;
+  border-color: #002F3F;
   color:#fff;
  }
  .btn-check:focus+.btn-primary,
@@ -487,11 +488,11 @@
  }
  .form-control:focus,
  .form-select:focus {
-  border-color:#1243B6
+  border-color:#00A8E8
  }
  .input-group:focus-within .form-control,
  .input-group:focus-within .input-group-text {
-  border-color:#1243B6
+  border-color:#00A8E8
  }
  .form-check-input:focus {
   border-color:#1243B6;
@@ -1302,6 +1303,7 @@
  .bg-menu-theme {
   background-color:#ffff!important;
   color:#fff;
+  box-shadow: #d7d7d7 0px 2px 6px 0px;
  }
  .bg-menu-theme .menu-horizontal-next,
  .bg-menu-theme .menu-horizontal-prev,
@@ -1317,7 +1319,8 @@
  .bg-menu-theme .menu-link.active,
  .bg-menu-theme .menu-link:focus,
  .bg-menu-theme .menu-link:hover {
-  color:#fff
+  color:#00A8E8
+
  }
  .bg-menu-theme .menu-horizontal-next.disabled,
  .bg-menu-theme .menu-horizontal-prev.disabled,
@@ -1326,7 +1329,7 @@
  }
  .bg-menu-theme .menu-item.active>.menu-link,
  .bg-menu-theme .menu-item.open:not(.menu-item-closing)>.menu-toggle {
-  color:white
+  color: white
  }
  .bg-menu-theme .menu-item.active>.menu-link:not(.menu-toggle) {
   background-color:#234
