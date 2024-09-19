@@ -1,5 +1,5 @@
 @extends('layouts/contentNavbarLayout', ["container" => "container-xxl m-w-950"])
-@section('title', 'Adicionar Usuário')
+@section('title', 'Adicionar Professor')
 @section('content')
 
 <style>
@@ -16,7 +16,7 @@
     </a>
 
     <h1 class="fw-light m-0 text-dark">
-      Adicionar Usuário
+      Adicionar Professor
     </h1>
   </div>
 </div>
