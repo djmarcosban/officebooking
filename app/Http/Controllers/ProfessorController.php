@@ -63,4 +63,12 @@ class ProfessorController extends Controller
 
     return redirect('/professores?status=success');
   }
+
+  public function delete()
+  {
+    $professorId = request('professor_id');
+    $this->professorRepository->delete($professorId);
+
+    return redirect('/professores?status=success');
+  }
 }

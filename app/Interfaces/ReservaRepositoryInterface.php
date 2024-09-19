@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface ClienteRepositoryInterface
+interface ReservaRepositoryInterface
 {
   public function findAll();
 

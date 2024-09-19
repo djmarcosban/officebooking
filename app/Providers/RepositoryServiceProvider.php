@@ -16,6 +16,9 @@ use App\Repositories\ProfessorRepository;
 use App\Interfaces\InventarioRepositoryInterface;
 use App\Repositories\InventarioRepository;
 
+use App\Interfaces\ReservaRepositoryInterface;
+use App\Repositories\ReservaRepository;
+
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +28,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind(ReservaRepositoryInterface::class, ReservaRepository::class);
         $this->app->bind(InventarioRepositoryInterface::class, InventarioRepository::class);
         $this->app->bind(ProfessorRepositoryInterface::class, ProfessorRepository::class);
         $this->app->bind(InstituicaoRepositoryInterface::class, InstituicaoRepository::class);

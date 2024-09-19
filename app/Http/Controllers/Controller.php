@@ -74,4 +74,30 @@ class Controller
 
         return redirect('/instituicoes');
     }
+
+    public function etapas()
+    {
+
+        $etapas = [
+            [
+                "slug" => "pendente",
+                "title" => "Pendentes"
+            ],
+            [
+                "slug" => "aprovada",
+                "title" => "Aprovadas"
+            ],
+            [
+                "slug" => "cancelada",
+                "title" => "Canceladas"
+            ],
+            [
+                "slug" => "historico",
+                "title" => "Histórico"
+            ],
+        ];
+
+        return $etapas;
+
+    }
 }

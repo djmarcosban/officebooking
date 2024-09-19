@@ -26,11 +26,18 @@ Route::middleware(['auth', 'roles:professor|admin'])->group(function(){
     Route::put('professor/{professor_id}/editar', 'App\Http\Controllers\ProfessorController@handleUpdate')->name('professores');
     Route::get('professor/adicionar', 'App\Http\Controllers\ProfessorController@create')->name('professores');
     Route::post('professor/adicionar', 'App\Http\Controllers\ProfessorController@handleCreate')->name('professores');
-    Route::delete('professor/{professor_id}/delete', 'App\Http\Controllers\ProfessorController@delete')->name('professores');
+    Route::delete('professor/{professor_id}/deletar', 'App\Http\Controllers\ProfessorController@delete')->name('professores');
 });
 
 Route::middleware(['auth', 'roles:admin'])->group(function(){
     Route::get('/configurar/instituicao/{instituicao_id}', 'App\Http\Controllers\Controller@configureSession')->where('instituicao_id', '[0-9]+');
+
+    Route::get('reservas', 'App\Http\Controllers\ReservaController@findAll')->name('reservas');
+    Route::get('reserva/{reserva_id}/editar', 'App\Http\Controllers\ReservaController@update')->name('reservas');
+    Route::put('reserva/{reserva_id}/editar', 'App\Http\Controllers\ReservaController@handleUpdate')->name('reservas');
+    Route::get('reserva/adicionar', 'App\Http\Controllers\ReservaController@create')->name('reservas');
+    Route::post('reserva/adicionar', 'App\Http\Controllers\ReservaController@handleCreate')->name('reservas');
+    Route::delete('reserva/{reserva_id}/deletar', 'App\Http\Controllers\ReservaController@delete')->name('reservas');
 
     Route::get('instituicoes', 'App\Http\Controllers\InstituicaoController@findAll')->name('instituicoes');
     Route::get('instituicao/{instituicao_id}/editar', 'App\Http\Controllers\InstituicaoController@update')->name('instituicoes');

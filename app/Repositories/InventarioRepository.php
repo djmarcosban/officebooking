@@ -168,7 +168,7 @@ class InventarioRepository implements InventarioRepositoryInterface
 
   public function delete($id)
   {
-    $instituicao = Inventario::find($id);
+    $instituicao = $this->findById($id);
     if($instituicao){
       $instituicao->delete();
     }

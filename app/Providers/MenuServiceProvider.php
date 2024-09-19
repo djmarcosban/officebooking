@@ -55,6 +55,13 @@ class MenuServiceProvider extends ServiceProvider
 
         if($user->funcao == 'admin'){
           $menu->menu[] = (object) [
+            "name" => "Reservas",
+            "icon" => "menu-icon tf-icons bx bx-time",
+            "slug" => "reservas",
+            "url" => "/reservas"
+          ];
+
+          $menu->menu[] = (object) [
             "name" => "Instituições",
             "icon" => "menu-icon tf-icons bx bx-buildings",
             "slug" => "instituicoes",
