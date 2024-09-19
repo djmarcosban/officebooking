@@ -71,7 +71,7 @@ class MenuServiceProvider extends ServiceProvider
           $menu->menu[] = (object) [
             "name" => "Professores",
             "icon" => "menu-icon tf-icons bx bx-group",
-            "slug" => "inventario",
+            "slug" => "professores",
             "url" => "/professores"
           ];
         }

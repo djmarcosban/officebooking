@@ -354,8 +354,8 @@
  .btn-check:focus+.btn-primary,
  .btn-primary.focus,
  .btn-primary:focus {
-  background-color: #FF9700;
-  border-color: #FF9700;
+  background-color: #002F3F;
+  border-color: #002F3F;
   box-shadow:none;
   color:#fff;
   -webkit-transform:translateY(0);
@@ -366,8 +366,8 @@
  .btn-primary.active,
  .btn-primary:active,
  .show>.btn-primary.dropdown-toggle {
-  background-color: #FF9700;
-  border-color: #FF9700;
+  background-color: #002F3F;
+  border-color: #002F3F;
   color:#fff
  }
  .btn-check:active+.btn-primary:focus,
@@ -403,7 +403,7 @@
  .btn-label-primary.active,
  .btn-label-primary:active,
  .show>.btn-label-primary.dropdown-toggle {
-  background-color: #FF9700;
+  background-color: #002F3F;
   border-color:transparent;
   color:#fff
  }
