@@ -5,7 +5,7 @@
     </a>
 
     <h1 class="fw-light m-0 text-dark">
-      {{$title}}
+      {!!$title!!}
     </h1>
   </div>
 </div>

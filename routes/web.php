@@ -41,6 +41,9 @@ Route::middleware(['auth', 'roles:professor|admin'])->group(function(){
 });
 
 Route::middleware(['auth', 'roles:admin'])->group(function(){
+    Route::get('/logs', 'App\Http\Controllers\LogController@showLogs')->name('logs');
+    Route::get('/logs/{fileName}', 'App\Http\Controllers\LogController@showLogFile')->name('logs');
+
     Route::get('/configurar/instituicao/{instituicao_id}', 'App\Http\Controllers\Controller@configureSession')->where('instituicao_id', '[0-9]+');
 
     Route::get('reservas', 'App\Http\Controllers\ReservaController@findAll')->name('reservas');

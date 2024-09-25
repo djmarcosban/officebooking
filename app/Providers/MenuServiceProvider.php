@@ -81,6 +81,13 @@ class MenuServiceProvider extends ServiceProvider
             "slug" => "professores",
             "url" => "/professores"
           ];
+
+          $menu->menu[] = (object) [
+            "name" => "Logs",
+            "icon" => "menu-icon tf-icons bx bx-detail",
+            "slug" => "logs",
+            "url" => "/logs"
+          ];
         }
 
         if($user->funcao == 'professor'){

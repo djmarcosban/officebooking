@@ -5,7 +5,7 @@
     </h1>
   </div>
 
-  @if(Auth::user()->funcao != 'operador')
+  @if(Auth::user()->funcao == 'admin' && !empty($url))
     <div class="col">
       <a href="{{$url}}" class="btn btn-primary"> <i class="bx bx-plus"></i> Adicionar novo</a>
     </div>

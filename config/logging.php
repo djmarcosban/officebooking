@@ -58,6 +58,11 @@ return [
             'ignore_exceptions' => false,
         ],
 
+        'custom' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/actions.log'),
+        ],
+
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
