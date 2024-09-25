@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 18/09/2024 às 00:47
+-- Tempo de geração: 25/09/2024 às 15:14
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -82,7 +82,8 @@ CREATE TABLE `instituicaos` (
 --
 
 INSERT INTO `instituicaos` (`id`, `nome`, `create_user_id`, `update_user_id`, `endereco`, `created_at`, `updated_at`) VALUES
-(1, 'UNIALFA Bueno', 1, 1, 'endereco', '2024-09-17 21:59:13', '2024-09-17 22:24:03');
+(1, 'UNIALFA Bueno', 1, 1, 'Av. Mutirão', '2024-09-17 21:59:13', '2024-09-18 23:40:38'),
+(3, 'UNIALFA Perimetral', 1, 1, 'Av. Juiz de Fora | N° 811 | Qd. 254 | Lt. 04 Jardim Novo Mundo | Goiânia GO', '2024-09-18 23:40:24', '2024-09-18 23:40:24');
 
 -- --------------------------------------------------------
 
@@ -95,14 +96,22 @@ CREATE TABLE `inventarios` (
   `nome` varchar(255) NOT NULL,
   `cap_max` varchar(255) DEFAULT NULL,
   `marca` varchar(255) DEFAULT NULL,
-  `descricao` varchar(255) NOT NULL,
-  `horarios` text NOT NULL,
+  `descricao` varchar(255) DEFAULT NULL,
+  `horarios` text DEFAULT NULL,
   `instituicao_id` int(11) NOT NULL,
   `create_user_id` int(11) NOT NULL,
   `update_user_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `inventarios`
+--
+
+INSERT INTO `inventarios` (`id`, `nome`, `cap_max`, `marca`, `descricao`, `horarios`, `instituicao_id`, `create_user_id`, `update_user_id`, `created_at`, `updated_at`) VALUES
+(11, 'HDMI', NULL, 'SAMSUNG', NULL, 'a:2:{i:1;a:12:{i:0;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"06:00\";s:11:\"horario_fim\";s:5:\"07:00\";}i:1;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"07:20\";s:11:\"horario_fim\";s:5:\"08:20\";}i:2;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"08:40\";s:11:\"horario_fim\";s:5:\"09:40\";}i:3;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"10:00\";s:11:\"horario_fim\";s:5:\"11:00\";}i:4;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"11:20\";s:11:\"horario_fim\";s:5:\"12:20\";}i:5;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"12:40\";s:11:\"horario_fim\";s:5:\"13:40\";}i:6;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"14:00\";s:11:\"horario_fim\";s:5:\"15:00\";}i:7;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"15:20\";s:11:\"horario_fim\";s:5:\"16:20\";}i:8;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"16:40\";s:11:\"horario_fim\";s:5:\"17:40\";}i:9;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"18:00\";s:11:\"horario_fim\";s:5:\"19:00\";}i:10;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"19:20\";s:11:\"horario_fim\";s:5:\"20:20\";}i:11;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"20:40\";s:11:\"horario_fim\";s:5:\"21:40\";}}i:2;a:8:{i:0;a:4:{s:10:\"dia_semana\";s:12:\"Terça-feira\";s:14:\"dia_semana_key\";s:1:\"2\";s:14:\"horario_inicio\";s:5:\"06:00\";s:11:\"horario_fim\";s:5:\"07:00\";}i:1;a:4:{s:10:\"dia_semana\";s:12:\"Terça-feira\";s:14:\"dia_semana_key\";s:1:\"2\";s:14:\"horario_inicio\";s:5:\"07:20\";s:11:\"horario_fim\";s:5:\"08:20\";}i:2;a:4:{s:10:\"dia_semana\";s:12:\"Terça-feira\";s:14:\"dia_semana_key\";s:1:\"2\";s:14:\"horario_inicio\";s:5:\"08:40\";s:11:\"horario_fim\";s:5:\"09:40\";}i:3;a:4:{s:10:\"dia_semana\";s:12:\"Terça-feira\";s:14:\"dia_semana_key\";s:1:\"2\";s:14:\"horario_inicio\";s:5:\"10:00\";s:11:\"horario_fim\";s:5:\"11:00\";}i:4;a:4:{s:10:\"dia_semana\";s:12:\"Terça-feira\";s:14:\"dia_semana_key\";s:1:\"2\";s:14:\"horario_inicio\";s:5:\"11:20\";s:11:\"horario_fim\";s:5:\"12:20\";}i:5;a:4:{s:10:\"dia_semana\";s:12:\"Terça-feira\";s:14:\"dia_semana_key\";s:1:\"2\";s:14:\"horario_inicio\";s:5:\"13:00\";s:11:\"horario_fim\";s:5:\"14:00\";}i:6;a:4:{s:10:\"dia_semana\";s:12:\"Terça-feira\";s:14:\"dia_semana_key\";s:1:\"2\";s:14:\"horario_inicio\";s:5:\"14:20\";s:11:\"horario_fim\";s:5:\"15:20\";}i:7;a:4:{s:10:\"dia_semana\";s:12:\"Terça-feira\";s:14:\"dia_semana_key\";s:1:\"2\";s:14:\"horario_inicio\";s:5:\"15:40\";s:11:\"horario_fim\";s:5:\"16:40\";}}}', 1, 1, 1, '2024-09-19 22:05:32', '2024-09-25 00:30:35'),
+(12, 'Sala de Informática 1104', '40', NULL, NULL, 'a:5:{i:1;a:3:{i:0;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"08:00\";s:11:\"horario_fim\";s:5:\"09:00\";}i:1;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"09:20\";s:11:\"horario_fim\";s:5:\"10:20\";}i:2;a:4:{s:10:\"dia_semana\";s:13:\"Segunda-feira\";s:14:\"dia_semana_key\";s:1:\"1\";s:14:\"horario_inicio\";s:5:\"10:40\";s:11:\"horario_fim\";s:5:\"11:40\";}}i:2;a:3:{i:0;a:4:{s:10:\"dia_semana\";s:12:\"Terça-feira\";s:14:\"dia_semana_key\";s:1:\"2\";s:14:\"horario_inicio\";s:5:\"08:00\";s:11:\"horario_fim\";s:5:\"09:00\";}i:1;a:4:{s:10:\"dia_semana\";s:12:\"Terça-feira\";s:14:\"dia_semana_key\";s:1:\"2\";s:14:\"horario_inicio\";s:5:\"09:20\";s:11:\"horario_fim\";s:5:\"10:20\";}i:2;a:4:{s:10:\"dia_semana\";s:12:\"Terça-feira\";s:14:\"dia_semana_key\";s:1:\"2\";s:14:\"horario_inicio\";s:5:\"10:40\";s:11:\"horario_fim\";s:5:\"11:40\";}}i:3;a:3:{i:0;a:4:{s:10:\"dia_semana\";s:12:\"Quarta-feira\";s:14:\"dia_semana_key\";s:1:\"3\";s:14:\"horario_inicio\";s:5:\"08:00\";s:11:\"horario_fim\";s:5:\"09:00\";}i:1;a:4:{s:10:\"dia_semana\";s:12:\"Quarta-feira\";s:14:\"dia_semana_key\";s:1:\"3\";s:14:\"horario_inicio\";s:5:\"09:20\";s:11:\"horario_fim\";s:5:\"10:20\";}i:2;a:4:{s:10:\"dia_semana\";s:12:\"Quarta-feira\";s:14:\"dia_semana_key\";s:1:\"3\";s:14:\"horario_inicio\";s:5:\"10:40\";s:11:\"horario_fim\";s:5:\"11:40\";}}i:4;a:3:{i:0;a:4:{s:10:\"dia_semana\";s:12:\"Quinta-feira\";s:14:\"dia_semana_key\";s:1:\"4\";s:14:\"horario_inicio\";s:5:\"13:00\";s:11:\"horario_fim\";s:5:\"14:00\";}i:1;a:4:{s:10:\"dia_semana\";s:12:\"Quinta-feira\";s:14:\"dia_semana_key\";s:1:\"4\";s:14:\"horario_inicio\";s:5:\"14:20\";s:11:\"horario_fim\";s:5:\"15:20\";}i:2;a:4:{s:10:\"dia_semana\";s:12:\"Quinta-feira\";s:14:\"dia_semana_key\";s:1:\"4\";s:14:\"horario_inicio\";s:5:\"15:40\";s:11:\"horario_fim\";s:5:\"16:40\";}}i:5;a:3:{i:0;a:4:{s:10:\"dia_semana\";s:11:\"Sexta-feira\";s:14:\"dia_semana_key\";s:1:\"5\";s:14:\"horario_inicio\";s:5:\"13:00\";s:11:\"horario_fim\";s:5:\"14:00\";}i:1;a:4:{s:10:\"dia_semana\";s:11:\"Sexta-feira\";s:14:\"dia_semana_key\";s:1:\"5\";s:14:\"horario_inicio\";s:5:\"14:20\";s:11:\"horario_fim\";s:5:\"15:20\";}i:2;a:4:{s:10:\"dia_semana\";s:11:\"Sexta-feira\";s:14:\"dia_semana_key\";s:1:\"5\";s:14:\"horario_inicio\";s:5:\"15:40\";s:11:\"horario_fim\";s:5:\"16:40\";}}}', 1, 1, 1, '2024-09-19 22:52:51', '2024-09-19 22:52:51');
 
 -- --------------------------------------------------------
 
@@ -185,8 +194,9 @@ CREATE TABLE `reservas` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `professor_id` int(11) NOT NULL,
   `inventario_id` int(11) NOT NULL,
-  `status` enum('pendente','aprovada','cancelada','reprovada') NOT NULL DEFAULT 'pendente',
-  `data` varchar(255) NOT NULL,
+  `instituicao_id` int(11) NOT NULL,
+  `status` enum('pendente','aprovada','cancelada','historico') NOT NULL DEFAULT 'pendente',
+  `data` varchar(255) DEFAULT NULL,
   `horario` varchar(255) NOT NULL,
   `descricao` varchar(255) NOT NULL,
   `create_user_id` int(11) NOT NULL,
@@ -194,6 +204,14 @@ CREATE TABLE `reservas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `reservas`
+--
+
+INSERT INTO `reservas` (`id`, `professor_id`, `inventario_id`, `instituicao_id`, `status`, `data`, `horario`, `descricao`, `create_user_id`, `update_user_id`, `created_at`, `updated_at`) VALUES
+(3, 2, 12, 1, 'historico', 'Quinta-feira, das 15:40 às 16:40', 'Quinta-feira, das 15:40 às 16:40', 'teste', 2, 1, '2024-09-25 00:07:38', '2024-09-25 13:09:11'),
+(4, 2, 11, 1, 'pendente', 'Segunda-feira, das 06:00 às 07:00', 'Segunda-feira, das 06:00 às 07:00', 'teste', 2, 1, '2024-09-25 00:25:50', '2024-09-25 13:13:09');
 
 -- --------------------------------------------------------
 
@@ -215,8 +233,12 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('e3BwtKTdCi8nhue9CyF6mXtknU8hDtJqX74zK0WV', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiVjV1bTBzN2dkVUZ6NnJYQkdBZXM1V3hlOUZmaGNOYmxGQXhxSVVheCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9mZXNzb3IvMi9lZGl0YXIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTQ6Imluc3RpdHVpY2FvX2lkIjtzOjE6IjEiO3M6MTY6Imluc3RpdHVpY2FvX25vbWUiO3M6MTM6IlVOSUFMRkEgQnVlbm8iO30=', 1726613199),
-('mwXw5Ebrykyr7vp2FSDosl2gR5XkirSYo3BZtZ3u', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidkdFa3dFSEhqQ1FNMks0NkY2cjJUa0FXWlNMekJLVHdwMnliV3ZDQyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0OToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2luc3RpdHVpY29lcz9zdGF0dXM9c3VjY2VzcyI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ5OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvaW5zdGl0dWljb2VzP3N0YXR1cz1zdWNjZXNzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1726610607);
+('2dS15cvQlDFoaOfgHYUvrR5FsV8jf8F28vsAt33s', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiN0VaVlRlWkVhc2RkanRJdHpWdlZGSGg2WUpFcXlKQUI1M25YWVB1WCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYWluZWwiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTQ6Imluc3RpdHVpY2FvX2lkIjtzOjE6IjEiO3M6MTY6Imluc3RpdHVpY2FvX25vbWUiO3M6MTM6IlVOSUFMRkEgQnVlbm8iO30=', 1727270051),
+('dJ0A5dmM4vC7gAGMEXVA9mAxAK3jSFGTrVvcojnk', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYWdhRTE5TjExc1JrT09vTk1maXdUNDJvM29hdEZ1V1RhSGJlSXdDdiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL21pbmhhcy1yZXNlcnZhcyI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvbWluaGFzLXJlc2VydmFzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1727224701),
+('HrdOKSHlzmWeLOBgZs98v2CTZDz0nrzD1GET1O6q', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYVBMVUV5Nm9INUt6VXU1U2M4VVdTeGJyNzdac3lNOUpQZllyaGhURCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1727224701),
+('NdhjR3UwYjEDAJ7GY92ZGk6rIUQUXGMDHRXHvltn', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoialNWZllvREVEcTV1OTU0d1p4S1IyTzRZRnUwSHZGWmFMbkgzNkRmTCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQyOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvaW52ZW50YXJpby9hZGljaW9uYXIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTQ6Imluc3RpdHVpY2FvX2lkIjtzOjE6IjEiO3M6MTY6Imluc3RpdHVpY2FvX25vbWUiO3M6MTM6IlVOSUFMRkEgQnVlbm8iO30=', 1727223198),
+('OzXEwnKMixHr3aX8Qy8ffTsFe7xmjOnNdj0BaQEU', 2, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiNTYxdWZwRlRteklVVXJKNk9pOGFneWRJdlhpUmVRdk1hNnVpR3I2USI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9yZXNlcnZhL2FkaWNpb25hciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7czoxNDoiaW5zdGl0dWljYW9faWQiO3M6MToiMSI7czoxNjoiaW5zdGl0dWljYW9fbm9tZSI7czoxMzoiVU5JQUxGQSBCdWVubyI7fQ==', 1727224966),
+('UMSCwfuHQ15wZDnNF9c5LQHO6QFpJ7dxVi5DyUVP', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiUmxIT3Y2aTVQM2xyZ2t1TWZlV1NXVVdyemhPSlkyVGxlRGVDMDZRSiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYWluZWwiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE0OiJpbnN0aXR1aWNhb19pZCI7czoxOiIxIjtzOjE2OiJpbnN0aXR1aWNhb19ub21lIjtzOjEzOiJVTklBTEZBIEJ1ZW5vIjt9', 1727225487);
 
 -- --------------------------------------------------------
 
@@ -228,6 +250,7 @@ CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nome` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `telefone` varchar(50) NOT NULL,
   `instituicao_id` int(11) DEFAULT NULL,
   `funcao` varchar(255) NOT NULL DEFAULT 'professor',
   `create_user_id` int(11) NOT NULL,
@@ -244,9 +267,9 @@ CREATE TABLE `users` (
 -- Despejando dados para a tabela `users`
 --
 
-INSERT INTO `users` (`id`, `nome`, `email`, `instituicao_id`, `funcao`, `create_user_id`, `update_user_id`, `primeiro_acesso`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ale', 'email@email.com', NULL, 'admin', 0, 0, 0, NULL, '$2y$12$sR5Cq9CuScok.3yPoWr33eFhvioSNQQmp9c1RT1yThmSzeBUoQ0MC', NULL, NULL, '2024-09-17 21:58:07'),
-(2, 'Marcos', 'djmarcosban@hotmail.com', 1, 'professor', 1, 1, 0, NULL, '$2y$12$wkaA6GAKwjDrN06f1AtjbeoVytESmD6mz/86DS3lboUPgoiBwCPOO', NULL, '2024-09-17 22:34:59', '2024-09-17 22:46:26');
+INSERT INTO `users` (`id`, `nome`, `email`, `telefone`, `instituicao_id`, `funcao`, `create_user_id`, `update_user_id`, `primeiro_acesso`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Ale', 'email@email.com', '(62) 99459-0787', NULL, 'admin', 0, 0, 0, NULL, '$2y$12$sR5Cq9CuScok.3yPoWr33eFhvioSNQQmp9c1RT1yThmSzeBUoQ0MC', NULL, NULL, '2024-09-25 00:51:22'),
+(2, 'Marcos', 'djmarcosban@hotmail.com', '(62) 99459-0787', 1, 'professor', 1, 1, 0, NULL, '$2y$12$VJ1yNmseLPznCMu3NMtzwOj7h8hk/7zOs625CeA6x8a/DEP5lIcTC', NULL, '2024-09-17 22:34:59', '2024-09-25 00:49:00');
 
 --
 -- Índices para tabelas despejadas
@@ -343,13 +366,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de tabela `instituicaos`
 --
 ALTER TABLE `instituicaos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `inventarios`
 --
 ALTER TABLE `inventarios`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `jobs`
@@ -367,13 +390,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de tabela `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
