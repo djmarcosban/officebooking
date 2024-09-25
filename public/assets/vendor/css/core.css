@@ -3109,7 +3109,7 @@ a.btn {
 .nav-link {
   display: block;
   padding: 0.5rem 1.25rem;
-  color: #1243b6;
+  color: #00b9ff;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3118,7 +3118,7 @@ a.btn {
   }
 }
 .nav-link:hover, .nav-link:focus {
-  color: #e1344c;
+  color: #002f3f;
 }
 .nav-link.disabled {
   color: #c7cdd4;

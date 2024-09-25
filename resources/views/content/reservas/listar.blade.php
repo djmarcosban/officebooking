@@ -71,7 +71,7 @@ $isMenu = false;
 
 <div id="kanban-board" class="row">
   @foreach ($etapas as $key => $etapa)
-    <div class="col etapa_{{$etapa['slug']}}" data-status="{{$etapa['slug']}}">
+    <div class="col-12 mb-4 mb-xl-0 col-xl etapa_{{$etapa['slug']}}" data-status="{{$etapa['slug']}}">
       <div class="card">
         <h5 class="card-header mb-0">{{$etapa['title']}}</h5>
         <hr class="m-0">
@@ -124,7 +124,7 @@ $isMenu = false;
       forcePlaceholderSize: true,
       stop: function(event, ui) {
         var item = ui.item;
-        var status = item.closest('.col').data('status');
+        var status = item.closest('.col-12').data('status');
         var itemId = item.data('id');
 
         $.ajax({
@@ -136,11 +136,17 @@ $isMenu = false;
             _token: '{{ csrf_token() }}'
           },
           success: function(response) {
-            console.log(response)
           },
-          error: function() {
+          error: function(response) {
             $(".kanban-items").sortable('cancel')
-            alert('Erro ao atualizar o Voucher. Contate o administrador.');
+            alert('Erro ao atualizar a Reserva. Contate o administrador.');
+            console.log(
+              {
+                reserva_id: itemId,
+                status: status,
+                _token: '{{ csrf_token() }}'
+              }
+            )
           }
         });
       }
