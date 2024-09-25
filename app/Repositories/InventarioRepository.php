@@ -14,9 +14,26 @@ class InventarioRepository implements InventarioRepositoryInterface
   public function findAll()
   {
     $instituicao_id = Controller::getSession('instituicao_id');
-    $instituicoes = Inventario::where('instituicao_id', $instituicao_id)->get();
+    $inventarios = Inventario::where('instituicao_id', $instituicao_id)->get();
 
-    return $instituicoes;
+    foreach ($inventarios as $key => $inventario) {
+      if(empty($inventario->horarios))
+      {
+        $inventarios[$key]['horarios'] = [];
+      }else{
+        $inventarios[$key]['horarios'] = unserialize($inventario->horarios);
+      }
+
+      $nome = $inventario->nome;
+      if(!empty($inventario->cap_max))
+      {
+        $nome = $inventario->nome.' (CAP. '.$inventario->cap_max.')';
+      }
+
+      $inventarios[$key]['nome'] = $nome;
+    }
+
+    return $inventarios;
   }
 
   public function findById($id)
@@ -35,6 +52,19 @@ class InventarioRepository implements InventarioRepositoryInterface
     }else{
       $inventario["horarios"] = unserialize($inventario->horarios);
     }
+
+    $nome = $inventario->nome;
+    if(!empty($inventario->cap_max))
+    {
+      $nome = $nome .' (CAP.: '.$inventario->cap_max.')';
+    }
+
+    if(!empty($inventario->marca))
+    {
+      $nome = $nome .' (MARCA: '.$inventario->marca.')';
+    }
+
+    $inventario['nome'] = $nome;
 
     return $inventario;
   }

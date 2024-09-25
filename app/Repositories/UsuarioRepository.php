@@ -119,6 +119,7 @@ class UsuarioRepository implements UsuarioRepositoryInterface
     $instituicao_id = Controller::getSession('instituicao_id');
 
     $query = $this->findById($request->id);
+    $query->telefone = $request->telefone;
     $query->nome = $request->nome;
 
     if(!empty($request->password)){

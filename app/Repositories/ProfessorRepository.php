@@ -42,6 +42,7 @@ class ProfessorRepository implements ProfessorRepositoryInterface
     $query->nome = $request->nome;
     $query->instituicao_id = $request->instituicao_id ?? $instituicao_id;
     $query->email = $request->email;
+    $query->telefone = $request->telefone;
     $query->primeiro_acesso = 1;
     $query->password = Hash::make($request->password);
     $query->create_user_id = Auth::user()->id;
@@ -58,6 +59,7 @@ class ProfessorRepository implements ProfessorRepositoryInterface
     $query = User::where('id', $request->id)->where('instituicao_id', $instituicao_id)->first();
     $query->nome = $request->nome;
     $query->email = $request->email;
+    $query->telefone = $request->telefone;
 
     if(!empty($request->password)){
       $query->primeiro_acesso = 1;

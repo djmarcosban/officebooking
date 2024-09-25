@@ -24,8 +24,8 @@
       </div>
     </div>
   </div>
-  
-  <h5>Preencha os dados de acesso:</h5>
+
+  <h5>Dados de acesso:</h5>
   <div class="card mb-4 col-12">
     <div class="card-body">
       <div class="row">
@@ -46,6 +46,20 @@
     </div>
   </div>
 
+  <h5>Dados de contato:</h5>
+  <div class="card mb-4 col-12">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-xl-3 col-6 mb-4 mb-xl-0">
+          <div class="form-group">
+            <label for="telefone" class="form-label">Telefone <small class="text-muted">(Opcional)</small></label>
+            <input type="text" name="telefone" id="telefone" value="{{$user->telefone}}" required class="form-control @error('email') is-invalid @enderror" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-auto d-flex justify-content-start">
       <input type="submit" class="btn rounded-1 btn-primary" value="Salvar Alterações" />
@@ -55,7 +69,7 @@
 </form>
 
 <script>
-  $('#whatsapp').mask('(99) 99999-9999')
+  $('#telefone').mask('(99) 99999-9999')
 </script>
 
 @endsection

@@ -71,7 +71,7 @@ $isMenu = false;
 
 <div id="kanban-board" class="row">
   @foreach ($etapas as $key => $etapa)
-    <div class="col etapa_{{$etapa['slug']}}" data-etapa="{{$key}}">
+    <div class="col etapa_{{$etapa['slug']}}" data-status="{{$etapa['slug']}}">
       <div class="card">
         <h5 class="card-header mb-0">{{$etapa['title']}}</h5>
         <hr class="m-0">
@@ -83,7 +83,7 @@ $isMenu = false;
                   <span class="fw-bold">Reserva #{{$reserva->id}}</span>
                 </div>
                 <div>
-                  Professor(a): {!!$reserva->professor->nome ?? '<span class="text-danger">Excluido</span>'!!}
+                  Solicitante: {!!$reserva->professor->nome ?? '<span class="text-danger">Excluido</span>'!!}
                 </div>
                 <hr>
                 <div class="row d-flex justify-content-between">
@@ -94,18 +94,13 @@ $isMenu = false;
                 <hr>
                 <div class="row d-flex justify-content-between mb-2">
                   <div class="col">
-                    <small>Data</small>
+                    <span class="fw-bold">Reservar em</span>
                     <br />
                     <span>{{$reserva->data}}</span>
                   </div>
-                  <div class="col">
-                    <small>Horário</small>
-                    <br />
-                    <span>{{$reserva->horario}}</span>
-                  </div>
                 </div>
-                <div class="mt-2">
-                  <small class="text-muted">{{$reserva->data_criacao}}</small>
+                <div class="mt-4">
+                  <small class="text-dark">Última alteração em {{\Carbon\Carbon::parse($reserva->updated_at)->format('d/m/Y H:i:s')}}</small>
                 </div>
               </div>
             @endforeach
@@ -129,24 +124,25 @@ $isMenu = false;
       forcePlaceholderSize: true,
       stop: function(event, ui) {
         var item = ui.item;
-        var etapa = item.closest('.col').data('etapa');
+        var status = item.closest('.col').data('status');
         var itemId = item.data('id');
 
-        // $.ajax({
-        //   url: '/kanban/update',
-        //   method: 'POST',
-        //   data: {
-        //     reserva_id: itemId,
-        //     etapa_id: etapa,
-        //     _token: '{{ csrf_token() }}'
-        //   },
-        //   success: function(response) {
-        //   },
-        //   error: function() {
-        //     $(".kanban-items").sortable('cancel')
-        //     alert('Erro ao atualizar o Voucher. Contate o administrador.');
-        //   }
-        // });
+        $.ajax({
+          url: '/reserva/atualizar',
+          method: 'POST',
+          data: {
+            reserva_id: itemId,
+            status: status,
+            _token: '{{ csrf_token() }}'
+          },
+          success: function(response) {
+            console.log(response)
+          },
+          error: function() {
+            $(".kanban-items").sortable('cancel')
+            alert('Erro ao atualizar o Voucher. Contate o administrador.');
+          }
+        });
       }
     }).disableSelection();
   });

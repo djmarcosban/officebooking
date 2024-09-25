@@ -16,8 +16,8 @@ return new class extends Migration
             $table->integer('professor_id');
             $table->integer('inventario_id');
             $table->integer('instituica_id');
-            $table->enum('status', ['pendente', 'aprovada', 'cancelada', 'reprovada'])->default('pendente');
-            $table->string('data');
+            $table->enum('status', ['pendente', 'aprovada', 'cancelada', 'historico'])->default('pendente');
+            $table->string('data')->nullable();
             $table->string('horario');
             $table->string('descricao');
             $table->integer('create_user_id');

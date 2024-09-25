@@ -86,7 +86,7 @@ class UsuarioController extends Controller
   public function firstAccess()
   {
     if(!Auth::user()->primeiro_acesso){
-      return to_route('/painel');
+      return to_route('dashboard');
     }
 
     return view('content.authentications.auth-first-access');
@@ -110,7 +110,7 @@ class UsuarioController extends Controller
     $request["id"] = Auth::id();
     $this->usuarioRepository->updatePassword($request);
 
-    return redirect('/painel');
+    return redirect('/');
   }
 
   public function updateMeusDados()

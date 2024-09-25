@@ -25,8 +25,8 @@
 
 <form action="" autocomplete="off" method="POST">
   @csrf
-  <h5>Preencha os campos abaixo:</h5>
 
+  <h5>Dados de acesso:</h5>
   <div class="card mb-4 col-12">
     <div class="card-body">
       <div class="row">
@@ -54,6 +54,20 @@
     </div>
   </div>
 
+  <h5>Dados de contato:</h5>
+  <div class="card mb-4 col-12">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-xl-3 col-6 mb-4 mb-xl-0">
+          <div class="form-group">
+            <label for="telefone" class="form-label">Telefone <small class="text-muted">(Opcional)</small></label>
+            <input type="text" name="telefone" id="telefone" value="{{@old('telefone')}}" required class="form-control @error('nome') is-invalid @enderror" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-auto d-flex justify-content-start">
       <a href="{{ url()->previous() }}" class="btn btn-outline-secondary me-4">Cancelar</a>
@@ -75,6 +89,8 @@
     }
     document.getElementById('password').value = password
   }
+
+  $('#telefone').mask('(99) 99999-9999')
 </script>
 
 @endsection

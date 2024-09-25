@@ -15,11 +15,11 @@
         <div class="card-body">
           <!-- Logo -->
           <div class="app-brand justify-content-center">
-            <div class="app-brand-logo"><img style="max-width: 120px;" src="{{asset('assets/img/logo-dark.png')}}"></div>
+            <div class="app-brand-logo"><img style="max-width: 100px;" src="{{asset('assets/img/logo-dark.png')}}"></div>
           </div>
 
           <!-- /Logo -->
-          <h5 class="mb-4 fw-normal text-danger text-center">Acesso não autorizado!</h5>
+          <h5 class="mb-4 mt-4 fw-normal text-danger text-center">Acesso não autorizado!</h5>
           <p class="mb-4 text-center">Motivo: Conta inativada.</p>
 
         </div>

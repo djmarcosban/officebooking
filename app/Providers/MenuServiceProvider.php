@@ -83,6 +83,22 @@ class MenuServiceProvider extends ServiceProvider
           ];
         }
 
+        if($user->funcao == 'professor'){
+          $menu->menu[] = (object) [
+            "name" => "Minhas Reservas",
+            "icon" => "menu-icon tf-icons bx bx-time",
+            "slug" => "minhas-reservas",
+            "url" => "/minhas-reservas"
+          ];
+
+          $menu->menu[] = (object) [
+            "name" => "Nova Reserva",
+            "icon" => "menu-icon tf-icons bx bx-plus-circle",
+            "slug" => "reserva-adicionar",
+            "url" => "/reserva/adicionar"
+          ];
+        }
+
         $menu->menu[] = (object) [
           "name" => "Meus Dados",
           "icon" => "menu-icon tf-icons bx bx-user",
