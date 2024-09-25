@@ -25,15 +25,15 @@ class LogAcoesMiddleware
             $dados = 'null';
             if($request->method() == 'POST')
             {
-                if(isset($request->password))
-                {
-                    unset($request['password']);
-                }
+                // if(isset($request->password))
+                // {
+                //     unset($request['password']);
+                // }
 
-                if(isset($request->password_confirmation))
-                {
-                    unset($request['password_confirmation']);
-                }
+                // if(isset($request->password_confirmation))
+                // {
+                //     unset($request['password_confirmation']);
+                // }
 
                 $dados = json_encode($request->all());
             }
