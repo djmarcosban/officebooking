@@ -1,5 +1,5 @@
 <!-- Footer-->
-<footer class="content-footer footer border-top" style="border-color: #ddd!important">
+{{-- <footer class="content-footer footer border-top" style="border-color: #ddd!important">
   <div class="container-fluid d-flex flex-wrap justify-content-end py-2">
     <div class="powered-by text-center">
       <a href="https://m2tech.cloud" target="_blank">
@@ -7,5 +7,5 @@
       </a>
     </div>
   </div>
-</footer>
+</footer> --}}
 <!--/ Footer-->
