@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 25/09/2024 às 15:14
+-- Tempo de geração: 25/09/2024 às 15:20
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -198,7 +198,7 @@ CREATE TABLE `reservas` (
   `status` enum('pendente','aprovada','cancelada','historico') NOT NULL DEFAULT 'pendente',
   `data` varchar(255) DEFAULT NULL,
   `horario` varchar(255) NOT NULL,
-  `descricao` varchar(255) NOT NULL,
+  `descricao` varchar(255) DEFAULT NULL,
   `create_user_id` int(11) NOT NULL,
   `update_user_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -210,8 +210,9 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`id`, `professor_id`, `inventario_id`, `instituicao_id`, `status`, `data`, `horario`, `descricao`, `create_user_id`, `update_user_id`, `created_at`, `updated_at`) VALUES
-(3, 2, 12, 1, 'historico', 'Quinta-feira, das 15:40 às 16:40', 'Quinta-feira, das 15:40 às 16:40', 'teste', 2, 1, '2024-09-25 00:07:38', '2024-09-25 13:09:11'),
-(4, 2, 11, 1, 'pendente', 'Segunda-feira, das 06:00 às 07:00', 'Segunda-feira, das 06:00 às 07:00', 'teste', 2, 1, '2024-09-25 00:25:50', '2024-09-25 13:13:09');
+(3, 2, 12, 1, 'cancelada', 'Quinta-feira, das 15:40 às 16:40', 'Quinta-feira, das 15:40 às 16:40', 'teste', 2, 1, '2024-09-25 00:07:38', '2024-09-25 13:20:11'),
+(4, 2, 11, 1, 'pendente', 'Segunda-feira, das 06:00 às 07:00', 'Segunda-feira, das 06:00 às 07:00', 'teste', 2, 1, '2024-09-25 00:25:50', '2024-09-25 13:20:08'),
+(5, 2, 11, 1, 'aprovada', 'Segunda-feira, das 08:40 às 09:40', 'Segunda-feira, das 08:40 às 09:40', NULL, 2, 1, '2024-09-25 13:15:33', '2024-09-25 13:20:10');
 
 -- --------------------------------------------------------
 
@@ -233,12 +234,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('2dS15cvQlDFoaOfgHYUvrR5FsV8jf8F28vsAt33s', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiN0VaVlRlWkVhc2RkanRJdHpWdlZGSGg2WUpFcXlKQUI1M25YWVB1WCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYWluZWwiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTQ6Imluc3RpdHVpY2FvX2lkIjtzOjE6IjEiO3M6MTY6Imluc3RpdHVpY2FvX25vbWUiO3M6MTM6IlVOSUFMRkEgQnVlbm8iO30=', 1727270051),
-('dJ0A5dmM4vC7gAGMEXVA9mAxAK3jSFGTrVvcojnk', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYWdhRTE5TjExc1JrT09vTk1maXdUNDJvM29hdEZ1V1RhSGJlSXdDdiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL21pbmhhcy1yZXNlcnZhcyI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvbWluaGFzLXJlc2VydmFzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1727224701),
-('HrdOKSHlzmWeLOBgZs98v2CTZDz0nrzD1GET1O6q', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYVBMVUV5Nm9INUt6VXU1U2M4VVdTeGJyNzdac3lNOUpQZllyaGhURCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1727224701),
-('NdhjR3UwYjEDAJ7GY92ZGk6rIUQUXGMDHRXHvltn', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoialNWZllvREVEcTV1OTU0d1p4S1IyTzRZRnUwSHZGWmFMbkgzNkRmTCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQyOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvaW52ZW50YXJpby9hZGljaW9uYXIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTQ6Imluc3RpdHVpY2FvX2lkIjtzOjE6IjEiO3M6MTY6Imluc3RpdHVpY2FvX25vbWUiO3M6MTM6IlVOSUFMRkEgQnVlbm8iO30=', 1727223198),
-('OzXEwnKMixHr3aX8Qy8ffTsFe7xmjOnNdj0BaQEU', 2, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiNTYxdWZwRlRteklVVXJKNk9pOGFneWRJdlhpUmVRdk1hNnVpR3I2USI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9yZXNlcnZhL2FkaWNpb25hciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7czoxNDoiaW5zdGl0dWljYW9faWQiO3M6MToiMSI7czoxNjoiaW5zdGl0dWljYW9fbm9tZSI7czoxMzoiVU5JQUxGQSBCdWVubyI7fQ==', 1727224966),
-('UMSCwfuHQ15wZDnNF9c5LQHO6QFpJ7dxVi5DyUVP', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiUmxIT3Y2aTVQM2xyZ2t1TWZlV1NXVVdyemhPSlkyVGxlRGVDMDZRSiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYWluZWwiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE0OiJpbnN0aXR1aWNhb19pZCI7czoxOiIxIjtzOjE2OiJpbnN0aXR1aWNhb19ub21lIjtzOjEzOiJVTklBTEZBIEJ1ZW5vIjt9', 1727225487);
+('4Kb6BKN2doBl4Z35FZWWis4XJWu6dNl2DDJf2YsE', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiN0IyaE9ScmtxT2s0YUxjMllrNGNVWmtJWW5HNlFKd0Naak9GaUpRTiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9pbnZlbnRhcmlvcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNDoiaW5zdGl0dWljYW9faWQiO3M6MToiMSI7czoxNjoiaW5zdGl0dWljYW9fbm9tZSI7czoxMzoiVU5JQUxGQSBCdWVubyI7fQ==', 1727270418);
 
 -- --------------------------------------------------------
 
@@ -390,7 +386,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de tabela `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `users`

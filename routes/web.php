@@ -11,8 +11,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'roles:professor'])->group(function(){
     Route::get('minhas-reservas', 'App\Http\Controllers\ReservaController@findAllByTeacher')->name('minhas-reservas');
-    Route::get('reserva/adicionar', 'App\Http\Controllers\ReservaController@create')->name('minhas-reservas');
-    Route::post('reserva/adicionar', 'App\Http\Controllers\ReservaController@handleCreate')->name('reservas');
+    Route::get('reserva/adicionar', 'App\Http\Controllers\ReservaController@create')->name('reserva-adicionar');
+    Route::post('reserva/adicionar', 'App\Http\Controllers\ReservaController@handleCreate')->name('reserva-adicionar');
     Route::get('reserva/{reserva_id}/editar', 'App\Http\Controllers\ReservaController@update')->name('reservas');
     Route::put('reserva/{reserva_id}/editar', 'App\Http\Controllers\ReservaController@handleUpdate')->name('reservas');
 });

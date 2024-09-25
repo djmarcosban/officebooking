@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('status', ['pendente', 'aprovada', 'cancelada', 'historico'])->default('pendente');
             $table->string('data')->nullable();
             $table->string('horario');
-            $table->string('descricao');
+            $table->string('descricao')->nullable();
             $table->integer('create_user_id');
             $table->integer('update_user_id');
             $table->timestamps();

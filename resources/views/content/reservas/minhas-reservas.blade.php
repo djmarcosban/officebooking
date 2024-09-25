@@ -32,6 +32,7 @@
               <th class="text-dark">Inventário</th>
               <th class="text-dark">Data</th>
               <th class="text-dark">Descrição</th>
+              <th class="text-dark">Criado em</th>
               <th class="text-dark">Ações</th>
             </tr>
           </thead>
@@ -56,6 +57,11 @@
                 <td>
                   <div class="d-flex align-items-center">
                     {{!empty($reserva->descricao) ? $reserva->descricao : '-'}}
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    {{$reserva->data_criacao}}
                   </div>
                 </td>
                 <td>

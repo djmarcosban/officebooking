@@ -1,4 +1,4 @@
-@extends('layouts/contentNavbarLayout', ["container" => "container-xxl col-12 m-w-950"])
+@extends('layouts/contentNavbarLayout', ["container" => "container-xxl col-12 m-w-1140"])
 @section('title', '('.count($inventarios).') Inventário')
 @section('content')
 
@@ -31,6 +31,7 @@
               <th class="text-dark">Nome</th>
               <th class="text-dark">Cap. Máx.</th>
               <th class="text-dark">Marca</th>
+              <th class="text-dark">Criado em</th>
               <th class="text-dark">Ações</th>
             </tr>
           </thead>
@@ -50,6 +51,11 @@
                 <td>
                   <div class="d-flex align-items-center">
                     {{$inventario->marca}}
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    {{$inventario->data_criacao}}
                   </div>
                 </td>
                 <td>

@@ -31,6 +31,7 @@ class InventarioRepository implements InventarioRepositoryInterface
       }
 
       $inventarios[$key]['nome'] = $nome;
+      $inventarios[$key]["data_criacao"] = Carbon::parse($inventario->created_at)->format('d/m/Y - H:i:s');
     }
 
     return $inventarios;

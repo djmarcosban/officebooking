@@ -10,6 +10,7 @@ use App\Repositories\InstituicaoRepository;
 use App\Repositories\UsuarioRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class ReservaRepository implements ReservaRepositoryInterface
 {
@@ -31,6 +32,7 @@ class ReservaRepository implements ReservaRepositoryInterface
 
         $reservas[$keyR]["professor"] = $professor;
         $reservas[$keyR]["inventario"] = $inventario;
+        $reservas[$keyR]["data_criacao"] = Carbon::parse($reserva->created_at)->format('d/m/Y - H:i:s');
       }
 
       $etapas[$key]["reservas"] = $reservas;
@@ -83,6 +85,7 @@ class ReservaRepository implements ReservaRepositoryInterface
       $status = sprintf('<span class="badge %s">%s</span>', $statusText, strtoupper($reserva->status));
 
       $reservas[$keyR]["status"] = ($status);
+      $reservas[$keyR]["data_criacao"] = Carbon::parse($reserva->created_at)->format('d/m/Y - H:i:s');
     }
 
     return $reservas;
