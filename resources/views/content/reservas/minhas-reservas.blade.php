@@ -66,14 +66,14 @@
                 </td>
                 <td>
                   <div class="d-flex">
-                    <a href="/reserva/{{$reserva->id}}/editar">
+                    {{-- <a href="/reserva/{{$reserva->id}}/editar">
                       <img src="{{ asset('assets/img/edit.png') }}" alt="Editar" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Editar" style="width: 21px" data-bs-original-title="" title="">
-                    </a>
+                    </a> --}}
 
                     <form action="/reserva/{{$reserva->id}}/deletar" method="POST">
                       @csrf
                       @method('DELETE')
-                      <input type="hidden" name="lote_id" value="{{$reserva->id}}">
+                      <input type="hidden" name="reserva_id" value="{{$reserva->id}}">
                       <button type="submit" onclick="if(!confirm('Deseja realmente fazer isso?')){ return false }" class="border-0 p-0 ms-2 bg-transparent" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Excluir" data-bs-original-title="" title="">
                         <img src="{{ asset('assets/img/delete.png') }}" alt="Excluir" class="rounded-circle" style="width: 20px">
                       </button>
