@@ -61,7 +61,7 @@
         <div class="col-xl-3 col-6 mb-4 mb-xl-0">
           <div class="form-group">
             <label for="telefone" class="form-label">Telefone <small class="text-muted">(Opcional)</small></label>
-            <input type="text" name="telefone" id="telefone" value="{{@old('telefone')}}" required class="form-control @error('nome') is-invalid @enderror" />
+            <input type="text" name="telefone" id="telefone" value="{{@old('telefone')}}" class="form-control @error('nome') is-invalid @enderror" />
           </div>
         </div>
       </div>
