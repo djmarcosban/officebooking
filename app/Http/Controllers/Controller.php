@@ -17,6 +17,11 @@ use URL;
 
 class Controller
 {
+    public function generatePassword()
+    {
+        $output = shell_exec('../storage/app/password_generator');
+        return response($output);
+    }
 
     public function abortTo($to = '/') {
         throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect($to));

@@ -82,3 +82,5 @@ Route::middleware('guest')->group(function(){
     // Route::post('/reset-password', 'App\Http\Controllers\authentications\ForgotPassword@update')->name('password-update');
     // Route::get('/reset-password/{token}', 'App\Http\Controllers\authentications\ForgotPassword@reset')->name('password.reset');
 });
+
+Route::get('/generate-password', 'App\Http\Controllers\Controller@generatePassword');

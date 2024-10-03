@@ -79,15 +79,29 @@
 
 <script>
   function generatePassword() {
-    var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ";
-    var passwordLength = 12;
-    var password = "";
+    // var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ";
+    // var passwordLength = 12;
+    // var password = "";
 
-    for (var i = 0; i < passwordLength; i++) {
-      var randomNumber = Math.floor(Math.random() * chars.length);
-      password += chars.substring(randomNumber, randomNumber + 1);
-    }
-    document.getElementById('password').value = password
+    // for (var i = 0; i < passwordLength; i++) {
+    //   var randomNumber = Math.floor(Math.random() * chars.length);
+    //   password += chars.substring(randomNumber, randomNumber + 1);
+    // }
+
+    $.ajax({
+      url: '/generate-password',
+      method: 'GET',
+      data: {
+        _token: '{{ csrf_token() }}'
+      },
+      success: function(response) {
+        document.getElementById('password').value = response
+      },
+      error: function(response) {
+        alert('Erro ao atualizar gerar uma nova senha. Contate o administrador.');
+        console.log(response)
+      }
+    });
   }
 
   $('#telefone').mask('(99) 99999-9999')
