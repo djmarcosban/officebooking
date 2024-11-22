@@ -19,7 +19,7 @@ class Controller
 {
     public function generatePassword()
     {
-        $output = shell_exec('../storage/app/password_generator');
+        $output = shell_exec('../storage/app/password_generator_new_version');
         return response($output);
     }
 

@@ -66,7 +66,7 @@
         </div>
 
         <div class="col-3">
-          <label for="horarioInicio" class="form-label">Horário de início:<span class="text-danger">*</span></label>
+          <label for="horarioInicio" class="form-label">Horário inicial:<span class="text-danger">*</span></label>
           <select name="horarioInicio" id="horarioInicio" required class="form-select">
             <?php
             $horario = new DateTime('06:00');
@@ -81,7 +81,7 @@
         </div>
 
         <div class="col-3">
-          <label for="horarioFim" class="form-label">Horário de início:<span class="text-danger">*</span></label>
+          <label for="horarioFim" class="form-label">Horário final:<span class="text-danger">*</span></label>
           <select name="horarioFim" id="horarioFim" required class="form-select">
             <?php
             $horario = new DateTime('07:00');

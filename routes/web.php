@@ -38,17 +38,17 @@ Route::middleware(['auth', 'roles:professor|admin'])->group(function(){
 
     Route::post('reserva/atualizar', 'App\Http\Controllers\ReservaController@change')->name('reservas');
     Route::delete('reserva/{reserva_id}/deletar', 'App\Http\Controllers\ReservaController@delete')->name('reservas');
+
+    Route::get('instituicoes', 'App\Http\Controllers\InstituicaoController@findAll')->name('instituicoes');
+    Route::get('/configurar/instituicao/{instituicao_id}', 'App\Http\Controllers\Controller@configureSession')->where('instituicao_id', '[0-9]+');
 });
 
 Route::middleware(['auth', 'roles:admin'])->group(function(){
     Route::get('/logs', 'App\Http\Controllers\LogController@showLogs')->name('logs');
     Route::get('/logs/{fileName}', 'App\Http\Controllers\LogController@showLogFile')->name('logs');
 
-    Route::get('/configurar/instituicao/{instituicao_id}', 'App\Http\Controllers\Controller@configureSession')->where('instituicao_id', '[0-9]+');
-
     Route::get('reservas', 'App\Http\Controllers\ReservaController@findAll')->name('reservas');
 
-    Route::get('instituicoes', 'App\Http\Controllers\InstituicaoController@findAll')->name('instituicoes');
     Route::get('instituicao/{instituicao_id}/editar', 'App\Http\Controllers\InstituicaoController@update')->name('instituicoes');
     Route::put('instituicao/{instituicao_id}/editar', 'App\Http\Controllers\InstituicaoController@handleUpdate')->name('instituicoes');
     Route::get('instituicao/adicionar', 'App\Http\Controllers\InstituicaoController@create')->name('instituicoes');
