@@ -8,6 +8,7 @@ use App\Models\Reserva;
 use App\Repositories\InventarioRepository;
 use App\Repositories\InstituicaoRepository;
 use App\Repositories\UsuarioRepository;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -19,27 +20,33 @@ class ReservaRepository implements ReservaRepositoryInterface
     $etapas = (new Controller)->etapas();
     $instituicao_id = Controller::getSession('instituicao_id');
 
-    $inventarioRepository = new InventarioRepository;
-    $usuarioRepository = new UsuarioRepository;
+    // Busca tudo da VIEW de uma vez (sem N+1)
+    $rows = DB::table('vw_reservas_basico')
+      ->when($instituicao_id, fn($q) => $q->where('instituicao_id', $instituicao_id)) // <- nome da coluna na view
+      ->orderByDesc('created_at')
+      ->get()
+      ->map(function ($r) {
+        // Mantém a estrutura que teu front espera
+        $r->data_criacao = Carbon::parse($r->created_at)->format('d/m/Y - H:i:s');
+        $r->professor = (object) [
+          'id' => $r->professor_id,
+          'nome' => $r->professor_nome,
+        ];
+        $r->inventario = (object) [
+          'id' => $r->inventario_id,
+          'nome' => $r->inventario_nome,
+        ];
+        return $r;
+      });
 
-    foreach ($etapas as $key => $etapa) {
-      $reservas = Reserva::where('status', $etapa['slug'])->where('instituicao_id', $instituicao_id)->get();
-
-      foreach($reservas as $keyR => $reserva)
-      {
-        $professor = $usuarioRepository->findById($reserva->professor_id);
-        $inventario = $inventarioRepository->findById($reserva->inventario_id);
-
-        $reservas[$keyR]["professor"] = $professor;
-        $reservas[$keyR]["inventario"] = $inventario;
-        $reservas[$keyR]["data_criacao"] = Carbon::parse($reserva->created_at)->format('d/m/Y - H:i:s');
-      }
-
-      $etapas[$key]["reservas"] = $reservas;
+    // Agrupa por etapa (status) reaproveitando teu array
+    foreach ($etapas as $k => $etapa) {
+      $etapas[$k]['reservas'] = $rows->where('status', $etapa['slug'])->values();
     }
 
     return $etapas;
   }
+
 
   public function findAllByTeacher()
   {
@@ -52,8 +59,7 @@ class ReservaRepository implements ReservaRepositoryInterface
 
     $reservas = Reserva::where('instituicao_id', $instituicao_id)->where('professor_id', Auth::id())->get();
 
-    foreach($reservas as $keyR => $reserva)
-    {
+    foreach ($reservas as $keyR => $reserva) {
       $professor = $usuarioRepository->findById($reserva->professor_id);
       $inventario = $inventarioRepository->findById($reserva->inventario_id);
       $instituicao = $instituicaoRepository->findById($reserva->instituicao_id);
@@ -62,23 +68,19 @@ class ReservaRepository implements ReservaRepositoryInterface
       $reservas[$keyR]["inventario"] = $inventario;
       $reservas[$keyR]["instituicao"] = $instituicao;
 
-      if($reserva->status == 'cancelada')
-      {
+      if ($reserva->status == 'cancelada') {
         $statusText = 'badge-danger';
       }
 
-      if($reserva->status == 'aprovada')
-      {
+      if ($reserva->status == 'aprovada') {
         $statusText = 'badge-success';
       }
 
-      if($reserva->status == 'pendente')
-      {
+      if ($reserva->status == 'pendente') {
         $statusText = 'badge-warning';
       }
 
-      if($reserva->status == 'historico')
-      {
+      if ($reserva->status == 'historico') {
         $statusText = 'bg-label-dark';
       }
 
@@ -96,8 +98,7 @@ class ReservaRepository implements ReservaRepositoryInterface
     $instituicao_id = Controller::getSession('instituicao_id');
     $reserva = Reserva::where('instituicao_id', $instituicao_id)->where('id', $id)->first();
 
-    if(!$reserva)
-    {
+    if (!$reserva) {
       return false;
     }
 
@@ -154,7 +155,7 @@ class ReservaRepository implements ReservaRepositoryInterface
   public function delete($id)
   {
     $reserva = $this->findById($id);
-    if($reserva){
+    if ($reserva) {
       $reserva->delete();
     }
 

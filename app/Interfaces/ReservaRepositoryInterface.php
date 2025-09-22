@@ -6,6 +6,8 @@ interface ReservaRepositoryInterface
 {
   public function findAll();
 
+  public function findAllByTeacher();
+
   public function findById($data);
 
   public function create($data);
