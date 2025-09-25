@@ -1,1 +1,1 @@
-<img src="{{asset('assets/img/logo-'.$color.'.png')}}">
+<img src="https://officebooking.m2tech.cloud/assets/img/logo-{{$color}}.png">

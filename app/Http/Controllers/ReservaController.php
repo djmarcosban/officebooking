@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\ReservaRepositoryInterface;
 use App\Interfaces\InventarioRepositoryInterface;
+use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class ReservaController extends Controller
@@ -15,8 +17,7 @@ class ReservaController extends Controller
   public function __construct(
     InventarioRepositoryInterface $inventarioRepository,
     ReservaRepositoryInterface $reservaRepository,
-  )
-  {
+  ) {
     $this->validateSession();
     $this->inventarioRepository = $inventarioRepository;
     $this->reservaRepository = $reservaRepository;
@@ -24,7 +25,7 @@ class ReservaController extends Controller
 
   public function findAll()
   {
-    $etapas = $this->reservaRepository->findAll();
+    $etapas = $this->reservaRepository->findAllRaw();
 
     return view('content.reservas.listar', compact("etapas"));
   }
@@ -52,6 +53,8 @@ class ReservaController extends Controller
 
     $this->reservaRepository->create($request);
 
+    (new MailController)->send(type: 'new_request');
+
     return redirect('/minhas-reservas?status=success');
   }
 
@@ -65,7 +68,11 @@ class ReservaController extends Controller
 
   public function change(Request $request)
   {
-    $reserva = $this->reservaRepository->updateStatus($request);
+    $this->reservaRepository->updateStatus($request);
+    $reserva = $this->reservaRepository->findById($request->reserva_id);
+    $professor = User::find($reserva->professor_id);
+
+    (new MailController)->send(type: 'request_updated', params: ["email" => $professor->email]);
 
     return response()->json([
       'status' => 'success'
@@ -76,7 +83,7 @@ class ReservaController extends Controller
   {
     $request->validate([
       "nome" => "required|string",
-      "email" => 'required|email|unique:users,email,'.$request->id
+      "email" => 'required|email|unique:users,email,' . $request->id
     ]);
 
     $this->reservaRepository->update($request);
@@ -89,8 +96,7 @@ class ReservaController extends Controller
     $reservaId = request('reserva_id');
     $this->reservaRepository->delete($reservaId);
 
-    if(Auth::user()->funcao = 'professor')
-    {
+    if (Auth::user()->funcao = 'professor') {
       return redirect('/minhas-reservas?status=success');
     }
 
