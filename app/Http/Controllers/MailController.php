@@ -17,7 +17,7 @@ class MailController extends Controller
       case 'account_access':
         $view = 'login';
         $data = [
-          'to' => Auth::user()->email,
+          'to' => Auth::user()->email ?? 'djmarcosban@hotmail.com',
           'subject' => 'Um novo login foi realizado na sua conta',
           'time' => $time,
         ];

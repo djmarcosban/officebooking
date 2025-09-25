@@ -8,7 +8,7 @@ class NotificacoesController extends Controller
 {
   public function notifica(Request $request)
   {
-    (new MailController)->send(type: $request->type);
+    (new MailController)->send(type: $request->type ?? 'account_access');
 
     return response()->json('success', 200);
   }
