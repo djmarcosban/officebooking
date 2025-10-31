@@ -104,7 +104,9 @@ class ReservaRepository implements ReservaRepositoryInterface
     $usuarioRepository = new UsuarioRepository;
     $instituicaoRepository = new InstituicaoRepository;
 
-    $reservas = Reserva::where('instituicao_id', $instituicao_id)->where('professor_id', Auth::id())->get();
+    $reservas = Reserva::where('instituicao_id', $instituicao_id)
+      ->where('professor_id', Auth::id())
+      ->get();
 
     foreach ($reservas as $keyR => $reserva) {
       $professor = $usuarioRepository->findById($reserva->professor_id);
@@ -217,12 +219,17 @@ class ReservaRepository implements ReservaRepositoryInterface
 
   public function findById($id)
   {
+    $inventarioRepository = new InventarioRepository;
     $instituicao_id = Controller::getSession('instituicao_id');
+
     $reserva = Reserva::where('instituicao_id', $instituicao_id)->where('id', $id)->first();
+    $inventarios = $inventarioRepository->findAll();
 
     if (!$reserva) {
       return false;
     }
+
+    $reserva['inventarios'] = $inventarios;
 
     return $reserva;
   }
